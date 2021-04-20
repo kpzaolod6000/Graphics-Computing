@@ -33,6 +33,7 @@ mapperCone = house.SetCone(1.9,1.6,20)#radio,height,resolution
 mapperCube1 = house.SetCube(2.5,2.5,2.5)#cuerpo
 mapperCube2 = house.SetCube(1.2,1.8,0.2)#puerta
 mapperCube3 = house.SetCube(0.1,1.1,1.4)#ventana
+mapperCube4 = house.SetCube(60,1.5,60)#piso
 
 ## Cerros
 mapperCerro1 = house.SetCone(10.0,15.0,60)#radio,height,resolution
@@ -77,7 +78,7 @@ actorCerro2 = house.SetActorCube(mapperCerro1,11/255, 83/255, 69/255 ,-7.0,5.0,-
 actorCube1 = house.SetActorCube(mapperCube1,235/255, 161/255, 52/255,0,0,0)#color and pos
 actorCube2 = house.SetActorCube(mapperCube2,235/255, 116/255, 52/255,0.0,-0.3,1.5)#color and pos
 actorCube3 = house.SetActorCube(mapperCube3,130/255, 185/255, 189/255,-1.5,0,0)#color and pos
-
+actorCube4 = house.SetActorCube(mapperCube4,11/255, 83/255, 69/255,0.0,-2.6,0)
 ### Cone
 actorCone = house.SetActorCube(mapperCone,142/255, 156/255, 151/255,0,2.0,0)#color and pos
 
@@ -122,6 +123,7 @@ renderer.AddActor(actorCone)
 renderer.AddActor(actorChapa)
 renderer.AddActor(actorCerro1)
 renderer.AddActor(actorCerro2)
+renderer.AddActor(actorCube4)
 ## sol
 renderer.AddActor(actorLinea1)
 renderer.AddActor(actorLinea2)
