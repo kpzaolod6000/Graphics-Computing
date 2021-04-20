@@ -73,21 +73,41 @@ class Tree:
                     arraySphere.append(pointZNeg)
                 
                 else:
+                    initialSize = len(arraySphere)
                     for i in range(indexArray,len(arraySphere)):
+                        isIntoPointXPos = False
+                        isIntoPointXNeg = False
+                        isIntoPointZPos = False
+                        isIntoPointZNeg = False
+
                         pointXPos = Point(arraySphere[i].x+0.3,arraySphere[i].y-dia,arraySphere[i].z)
                         pointXNeg = Point(arraySphere[i].x-0.3,arraySphere[i].y-dia,arraySphere[i].z)
                         pointZPos = Point(arraySphere[i].x,arraySphere[i].y-dia,arraySphere[i].z+0.3)
                         pointZNeg = Point(arraySphere[i].x,arraySphere[i].y-dia,arraySphere[i].z-0.3)
-                        arraySphere.append(pointXPos)
-                        arraySphere.append(pointXNeg)
-                        arraySphere.append(pointZPos)
-                        arraySphere.append(pointZNeg)
-                    indexArray = 4**(quantityNivel-1)
+                        for j in range(indexArray,len(arraySphere)):
+                            if (pointXPos.x == arraySphere[j].x and pointXPos.y == arraySphere[j].y and pointXPos.z == arraySphere[j].z):
+                                isIntoPointXPos = True
+                            if(pointXNeg.x == arraySphere[j].x and pointXNeg.y == arraySphere[j].y and pointXNeg.z == arraySphere[j].z):
+                                isIntoPointXNeg = True
+                            if(pointZPos.x == arraySphere[j].x and pointZPos.y == arraySphere[j].y and pointZPos.z == arraySphere[j].z):
+                                isIntoPointZPos = True
+                            if(pointZNeg.x == arraySphere[j].x and pointZNeg.y == arraySphere[j].y and pointZNeg.z == arraySphere[j].z):
+                                isIntoPointZNeg = True
+                        if (not isIntoPointXPos):
+                            arraySphere.append(pointXPos)
+                        if(not isIntoPointXNeg):
+                            arraySphere.append(pointXNeg)
+                        if(not isIntoPointZPos):
+                            arraySphere.append(pointZPos)
+                        if(not isIntoPointZNeg):
+                            arraySphere.append(pointZNeg)
+                    
+                    indexArray = initialSize
                 
             else:
                 
                 if(len(arraySphere) == 0):
-                    print('hola')
+                    print('<4')
                 else:
                     for i in range(quantitySphere):
                         leafRandom=random.randint(indexArray, len(arraySphere)-1)

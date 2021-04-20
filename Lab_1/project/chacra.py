@@ -91,8 +91,8 @@ actorTrunk2 = tree.SetActorTrunk(mapperTrunk,-2,0.0,1.5)#mapperTrunk,posx,posy,p
 
 ###Hojas
 #establecer las esferas
-arraySphere = tree.SetTree(50,2,1.6,1.5)#cantidad,posx,posy,posz raiz
-arraySphere2 = tree.SetTree(25,-2,1.6,1.5)#cantidad,posx,posy,posz raiz
+arraySphere = tree.SetTree(341,2,1.6,1.5)#cantidad,posx,posy,posz raiz
+arraySphere2 = tree.SetTree(341,-2,1.6,1.5)#cantidad,posx,posy,posz raiz
 
 #axes
 transform = vtk.vtkTransform()
@@ -138,7 +138,7 @@ renderer.AddActor(actornube5)
 
 
 ###### Estableciendo mas arboles
-quantityTree = 1
+quantityTree = 50
 for i in range(quantityTree):
     positionX=random.uniform(-30,30)
     positionZ=random.uniform(-30,30)
@@ -148,16 +148,14 @@ for i in range(quantityTree):
         positionZ=random.uniform(-30,30)
 
     actorTrunk_aux = tree.SetActorTrunk(mapperTrunk,positionX,0.0,positionZ)
-    quantityLeaf=random.randint(5,30)
+    quantityLeaf=random.randint(5,85)
     arraySphere_aux = tree.SetTree(quantityLeaf,positionX,1.6,positionZ)
     renderer.AddActor(actorTrunk_aux)
+    #cantidad = 1
     for pointLeaf in arraySphere_aux:
+        #print(pointLeaf.x)print(pointLeaf.y)#print(pointLeaf.z)#print(cantidad)#cantidad+=1
         actorLeaf_aux = tree.SetActorLeaf(mapperLeaf,pointLeaf.x,pointLeaf.y,pointLeaf.z)
         renderer.AddActor(actorLeaf_aux)
-
-
-
- 
 
 
 #renderWindow
