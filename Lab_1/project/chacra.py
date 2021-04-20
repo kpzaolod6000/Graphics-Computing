@@ -2,6 +2,7 @@ import vtk
 import random
 import house as h
 import arbol as abl
+import nube as nube
 import sol
 
 # source
@@ -15,6 +16,9 @@ house = h.House()
 ## Sol
 sun = sol.Sun()
 
+##nube
+nube = nube.clouds()
+
 # mapper
 ## Arbol
 ### Tronco
@@ -25,7 +29,7 @@ mapperLeaf = tree.SetLeaf(0.3,500)#radio,resolution
 
 ## Casa
 mapperChapa = house.SetSphere(0.1)#radio
-mapperCone = house.SetCone(1.9,1.6,50)#radio,height,resolution
+mapperCone = house.SetCone(1.9,1.6,20)#radio,height,resolution
 mapperCube1 = house.SetCube(2.5,2.5,2.5)#cuerpo
 mapperCube2 = house.SetCube(1.2,1.8,0.2)#puerta
 mapperCube3 = house.SetCube(0.1,1.1,1.4)#ventana
@@ -50,6 +54,18 @@ actorLinea3 = sun.SetActorLineas(mapperLineas,1,1,0,2,13,-40,45.0)#mapperSphere,
 actorLinea4 = sun.SetActorLineas(mapperLineas,1,1,0,-2,13,-40,135.0)#mapperSphere,r,g,b,posX,posY,posZ,rotate
 actorLinea5 = sun.SetActorLineas(mapperLineas,1,1,0,2,7,-40,315.0)#mapperSphere,r,g,b,posX,posY,posZ,rotate
 actorLinea6 = sun.SetActorLineas(mapperLineas,1,1,0,-2,7,-40,225.0)#mapperSphere,r,g,b,posX,posY,posZ,rotate
+
+######################nubes
+
+
+mappernubes=nube.Setnform(20,20,6,2,2)
+
+actornube1 = nube.SetActornform(mappernubes,0,0,1,15,15,-30,0.1)
+actornube2 = nube.SetActornform(mappernubes,0,0,1,8,14,30,1.3)
+actornube3 = nube.SetActornform(mappernubes,0,0,1,-1,14,-18,-1.-2)
+actornube4 = nube.SetActornform(mappernubes,0,0,1,-8.5,11,15,0.0)
+actornube5 = nube.SetActornform(mappernubes,0,0,1,-15.2,14,6,0.0)
+######################
 
 
 ## Cerros
@@ -113,10 +129,16 @@ renderer.AddActor(actorLinea3)
 renderer.AddActor(actorLinea4)
 renderer.AddActor(actorLinea5)
 renderer.AddActor(actorLinea6)
+###########nube 
+renderer.AddActor(actornube1)
+renderer.AddActor(actornube2)
+renderer.AddActor(actornube3)
+renderer.AddActor(actornube4)
+renderer.AddActor(actornube5)
 
 
 ###### Estableciendo mas arboles
-quantityTree = 100
+quantityTree = 1
 for i in range(quantityTree):
     positionX=random.uniform(-30,30)
     positionZ=random.uniform(-30,30)
