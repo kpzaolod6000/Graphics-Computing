@@ -18,12 +18,12 @@ class MyFloor:
         self.depth = depth
         self.height = height
 
-sphere = MySphere([-10,2.5,15], 2)
+sphere = MySphere([15,2.5,5], 2)
 floor = MyFloor([0,0,0],1,40,40)
-time = 0.02
-aceleration = 1.80 #m/(s**2)
+time = 0.08
+aceleration = 2 #m/(s**2)
 #height = abs(floor.pos[1] - sphere.pos[1]) # = (1/2)*g*time^2
-(-1*sphere.velocity[0])#MRUV
+
 def set_initial_position():
     sphere_actor.SetPosition(sphere.pos[0], sphere.pos[1], sphere.pos[2])
     floor_actor.SetPosition(floor.pos[0], floor.pos[1], floor.pos[2])
@@ -36,6 +36,7 @@ def set_initial_position():
 def callback_func(caller, timer_event):
     global aceleration,time
     print('pos: ', sphere.pos)
+    print('time',time)
     print('aceleration: ', aceleration)
     print('velocity: ', sphere.velocity)
     sphere.pos[0] = sphere.pos[0] + sphere.velocity[0]*time #MRU
@@ -45,25 +46,25 @@ def callback_func(caller, timer_event):
     sphere.last_velocity[2] = sphere.velocity[2]
 
     if (sphere.pos[0] + sphere.radius > (floor.width/2) - 1) or ((sphere.pos[0]) - sphere.radius < (-1*(floor.width/2)) + 1):
-        print("HOLAA MUNDO")
-        print("HOLAA MUNDO")
-        print("HOLAA MUNDO")
-        print("HOLAA MUNDO")
+
         sphere.velocity[0] = (-1*sphere.velocity[0])#MRUV
         #aceleration-=1
     elif(sphere.pos[2] + sphere.radius > (floor.depth/2) - 1) or ((sphere.pos[2]) - sphere.radius < (-1*(floor.depth/2)) + 1):
         sphere.velocity[2] = (-1*sphere.velocity[2]) #MRUV
         #aceleration-=1
     else:
-        
+    
         sphere.velocity[0] = sphere.velocity[0] + aceleration*time #MRUV
-        sphere.velocity[2] = sphere.velocity[2] + aceleration*time #MRUV
-      
-
+        sphere.velocity[2] = sphere.velocity[2] + aceleration*time #MRUV      
 
     sphere.actor.SetPosition(sphere.pos[0], sphere.pos[1], sphere.pos[2])
-    #time+=0.0001
-    aceleration += 0.001
+    #time+=0.00000001
+    if time <= 0.0:
+        time = 0
+        aceleration = 0
+    else:
+        time -= 0.0001
+        aceleration -= 0.01
     render_window.Render()
     
     
@@ -147,10 +148,10 @@ wallZNeg_actor.GetProperty().SetColor(1, 1, 0.0)
 
 
 #axes
-transform = vtk.vtkTransform()
-transform.Translate(0.0, 0.0, 0.0) 
-axes = vtk.vtkAxesActor()
-axes.SetUserTransform(transform)
+# transform = vtk.vtkTransform()
+# transform.Translate(0.0, 0.0, 0.0) 
+# axes = vtk.vtkAxesActor()
+# axes.SetUserTransform(transform)
 
 
 #camera
@@ -162,7 +163,7 @@ camera.SetPosition(0,150,50)
 #renderer
 renderer = vtk.vtkRenderer()
 renderer.SetBackground(0.0, 0.0, 0.0)
-renderer.AddActor(axes)
+#renderer.AddActor(axes)
 renderer.AddActor(floor_actor)
 renderer.AddActor(wallXPos_actor)
 renderer.AddActor(wallXNeg_actor)
