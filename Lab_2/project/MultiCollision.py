@@ -5,8 +5,8 @@ class MySphere:
     def __init__(self, pos, radius):
         self.pos = pos
         self.radius = radius    
-        self.velocity = [30,0,30] # la esfera avanza hacia el eje X Y z
-        self.last_velocity = [30,0,30]
+        self.velocity = [-30,0,-30] # la esfera avanza hacia el eje X Y z
+        self.last_velocity = [-30,0,-30]
         self.actor = None
 
 class MyFloor:
@@ -18,9 +18,9 @@ class MyFloor:
         self.depth = depth
         self.height = height
 
-sphere = MySphere([15,2.5,5], 2)
+sphere = MySphere([-10,2.5,10], 2)
 floor = MyFloor([0,0,0],1,40,40)
-time = 0.08
+time = 0.05
 aceleration = 2 #m/(s**2)
 #height = abs(floor.pos[1] - sphere.pos[1]) # = (1/2)*g*time^2
 
@@ -42,9 +42,6 @@ def callback_func(caller, timer_event):
     sphere.pos[0] = sphere.pos[0] + sphere.velocity[0]*time #MRU
     sphere.pos[2] = sphere.pos[2] + sphere.velocity[2]*time #MRU
     
-    sphere.last_velocity[0] = sphere.velocity[0]
-    sphere.last_velocity[2] = sphere.velocity[2]
-
     if (sphere.pos[0] + sphere.radius > (floor.width/2) - 1) or ((sphere.pos[0]) - sphere.radius < (-1*(floor.width/2)) + 1):
 
         sphere.velocity[0] = (-1*sphere.velocity[0])#MRUV
@@ -67,7 +64,23 @@ def callback_func(caller, timer_event):
         aceleration -= 0.01
     render_window.Render()
     
-    
+#image for texture
+reader = vtk.vtkJPEGReader()
+reader.SetFileName("ball13.jpg")
+
+reader_cube = vtk.vtkJPEGReader()
+reader_cube.SetFileName("pasto.jpg")
+
+
+# Create texture object
+texture = vtk.vtkTexture()
+texture_cube = vtk.vtkTexture()
+if vtk.VTK_MAJOR_VERSION <= 5:
+    texture.SetInput(reader.GetOutput())
+    texture_cube.SetInput(reader_cube.GetOutput())
+else:
+    texture.SetInputConnection(reader.GetOutputPort())
+    texture_cube.SetInputConnection(reader_cube.GetOutputPort())
 
 # source
 ##sphere
@@ -82,6 +95,17 @@ sourceFloor.SetXLength(40)
 sourceFloor.SetYLength(floor.height)
 sourceFloor.SetZLength(40)
 sourceFloor.Update()
+
+# Map texture coordinates
+map_to_sphere = vtk.vtkTextureMapToSphere()
+map_to_cube = vtk.vtkTextureMapToPlane()
+if vtk.VTK_MAJOR_VERSION <= 5:
+    map_to_sphere.SetInput(sourceSphere.GetOutput())
+    map_to_cube.SetInput(sourceFloor.GetOutput())
+else:
+    map_to_sphere.SetInputConnection(sourceSphere.GetOutputPort())
+    map_to_cube.SetInputConnection(sourceFloor.GetOutputPort())
+
 
 ##wall
 sourceWallX = vtk.vtkCubeSource()
@@ -100,11 +124,24 @@ sourceWallZ.Update()
 
 ##sphere
 sphere_mapper = vtk.vtkPolyDataMapper()
-sphere_mapper.SetInputData(sourceSphere.GetOutput())
+if vtk.VTK_MAJOR_VERSION <= 5:
+    sphere_mapper.SetInput(map_to_sphere.GetOutput())
+
+else:
+    sphere_mapper.SetInputConnection(map_to_sphere.GetOutputPort())
+
+#sphere_mapper = vtk.vtkPolyDataMapper()
+#sphere_mapper.SetInputData(map_to_sphere.GetOutput())
+
 
 ##floor
+
 floor_mapper = vtk.vtkPolyDataMapper()
-floor_mapper.SetInputData(sourceFloor.GetOutput())
+if vtk.VTK_MAJOR_VERSION <= 5:
+    floor_mapper.SetInputData(map_to_cube.GetOutput())
+    
+else:
+    floor_mapper.SetInputConnection(map_to_cube.GetOutputPort())
 
 ##wall
 wall_mapperX = vtk.vtkPolyDataMapper()
@@ -119,13 +156,15 @@ wall_mapperZ.SetInputData(sourceWallZ.GetOutput())
 ##sphere
 sphere_actor = vtk.vtkActor()
 sphere_actor.SetMapper(sphere_mapper)
-sphere_actor.GetProperty().SetColor(0.0, 1.0, 0.0)
+#sphere_actor.GetProperty().SetColor(0.0, 1.0, 0.0)
+sphere_actor.SetTexture(texture)
 sphere.actor = sphere_actor
 
 ##floor
 floor_actor = vtk.vtkActor()
 floor_actor.SetMapper(floor_mapper)
-floor_actor.GetProperty().SetColor(1, 1, 0.0)
+floor_actor.SetTexture(texture_cube)
+#floor_actor.GetProperty().SetColor(1, 1, 0.0)
 floor.actor = floor_actor
  ##walls
 wallXPos_actor = vtk.vtkActor()
