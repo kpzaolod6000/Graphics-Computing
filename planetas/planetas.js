@@ -230,42 +230,16 @@ function redimensionar(){
 * para controlar la animacion
 */
 
-
-var clock = new THREE.Clock();
-var time = 0;
-var delta = 0;
-function movePlanets(dataPlanet,time,daybyOrbit,velocity,distanciaAxis){
- 
-    //earth.rotation.x = time * 4;
-    dataPlanet.position.x = Math.cos(time*(1.0/daybyOrbit*velocity)+10) * distanciaAxis;
-    dataPlanet.position.z =Math.sin(time*(1.0/daybyOrbit*velocity)+10) * distanciaAxis;
-
-}
-
 var animate = function(){
-    requestAnimationFrame(animate);   
-    //earth         
-    delta = clock.getDelta();
-    // console.log("delta");
-    // console.log(delta);
-    // console.log("timer");
-    // console.log(time);
-    time += delta;
-    // earth.position.x = Math.cos(time*(1.0/366*200)+10) * 14.9;
-    // earth.position.z = Math.sin(time*(1.0/366*200)+10)*14.9;
-    //dias, velocidad km/s,y distancia
-    movePlanets(mercury,time,88,47.87,5.8);
-    movePlanets(venus,time,225,53.02,10.8);
-    movePlanets(earth,time,366,29.78 ,14.9);
-    movePlanets(mars,time,687,24.07,22.8);
-    movePlanets(jupiter,time,4339,13.07,77.8);
-    movePlanets(saturn,time,10752,9.69,142.6);
-    movePlanets(uranus,time,30667,6.81,287);
-    movePlanets(neptune,time,60140,5.43,449.8);
-    movePlanets(pluto,time,90404,4.66,590);
-    
-    //movePlanets(earth,time,366,30,14.9)
-    
+    requestAnimationFrame(animate);            
+
+    // para recorrer cada objeto de la scena (tambien incluye la camara)
+    // scene.traverse(function(object){
+    //     if (object.isMesh == true){ // para evitar rotar la camara
+    //         object.rotation.y += 0.01;
+    //         //object.rotation.y += 0.01;
+    //     }
+    // });
     sun.rotation.y += rotaciond[0];
     mercury.rotation.y += rotaciond[1];
     venus.rotation.y += rotaciond[2];
