@@ -2,6 +2,11 @@ import * as THREE from './jsm/three.module.js';
 import { GUI } from './jsm/dat.gui.module.js';
 import {OrbitControls} from './jsm/OrbitControls.js';
 
+
+//Rotacion por dias aprox
+
+var rotaciond =[0.0004,0.003,0.000041,0.01,0.00997,0.0244,0.0223,0.0139,0.0149,0.001563]
+
 /*
 * utilizado cuando queremos poner la lampara dentro de la scene como un mesh
 */
@@ -64,11 +69,11 @@ scene.add( sun );
 
 var geometryMercury = new THREE.SphereGeometry(0.5, 32, 32);        
 //var material = new THREE.MeshBasicMaterial( {color:0x00ff00, wireframe: true} );
-const textureMercury = new THREE.TextureLoader().load( 'textures/mercury.jpg' );
+const textureMercury = new THREE.TextureLoader().load( 'textures/mercury.png' );
 var materialMercury = new THREE.MeshPhongMaterial( {map: textureMercury } );
 var mercury = new THREE.Mesh( geometryMercury,materialMercury ); 
 mercury.position.y = 0;
-mercury.position.x = 5;
+mercury.position.x = 5.8;
 mercury.position.z = 0;
 scene.add( mercury );
 
@@ -78,7 +83,7 @@ const textureVenus = new THREE.TextureLoader().load( 'textures/venus.jpg' );
 var materialVenus = new THREE.MeshPhongMaterial( {map: textureVenus } );
 var venus = new THREE.Mesh( geometryVenus,materialVenus ); 
 venus.position.y = 0;
-venus.position.x = 5;
+venus.position.x = 10.8;
 venus.position.z = 0;
 scene.add( venus );
 
@@ -88,7 +93,7 @@ const textureEarth = new THREE.TextureLoader().load( 'textures/earth.jpg' );
 var materialEarth = new THREE.MeshPhongMaterial( {map: textureEarth } );
 var earth = new THREE.Mesh( geometryEarth,materialEarth ); 
 earth.position.y = 0;
-earth.position.x = 10;
+earth.position.x = 14.9;
 earth.position.z = 0;
 scene.add( earth );
 
@@ -98,7 +103,7 @@ const textureMars = new THREE.TextureLoader().load( 'textures/marte.jpg' );
 var materialMars = new THREE.MeshPhongMaterial( {map: textureMars } );
 var mars = new THREE.Mesh( geometryMars,materialMars ); 
 mars.position.y = 0;
-mars.position.x = 15;
+mars.position.x = 22.8;
 mars.position.z = 0;
 scene.add( mars );
 
@@ -108,7 +113,7 @@ const textureJupiter = new THREE.TextureLoader().load( 'textures/jupiter.jpg' );
 var materialJupiter = new THREE.MeshPhongMaterial( {map: textureJupiter } );
 var jupiter = new THREE.Mesh( geometryJupiter,materialJupiter ); 
 jupiter.position.y = 0;
-jupiter.position.x = 20;
+jupiter.position.x = 77.8;
 jupiter.position.z = 0;
 scene.add( jupiter );
 
@@ -118,7 +123,7 @@ const textureSaturn = new THREE.TextureLoader().load( 'textures/saturn.jpg' );
 var materialSaturn = new THREE.MeshPhongMaterial( {map: textureSaturn } );
 var saturn = new THREE.Mesh( geometrySaturn,materialSaturn ); 
 saturn.position.y = 0;
-saturn.position.x = 25;
+saturn.position.x = 142.6;
 saturn.position.z = 0;
 scene.add( saturn );
 
@@ -128,7 +133,7 @@ const textureUranus = new THREE.TextureLoader().load( 'textures/uranus.jpg' );
 var materialUranus = new THREE.MeshPhongMaterial( {map: textureUranus } );
 var uranus = new THREE.Mesh( geometryUranus,materialUranus ); 
 uranus.position.y = 0;
-uranus.position.x = 30;
+uranus.position.x = 287;
 uranus.position.z = 0;
 scene.add( uranus );
 
@@ -138,7 +143,7 @@ const textureNeptune = new THREE.TextureLoader().load( 'textures/neptune.jpg' );
 var materialNeptune = new THREE.MeshPhongMaterial( {map: textureNeptune } );
 var neptune = new THREE.Mesh( geometryNeptune,materialNeptune ); 
 neptune.position.y = 0;
-neptune.position.x = 35;
+neptune.position.x = 449.8;
 neptune.position.z = 0;
 scene.add( neptune );
 
@@ -148,7 +153,7 @@ const texturePluto = new THREE.TextureLoader().load( 'textures/pluto.jpg' );
 var materialPluto= new THREE.MeshPhongMaterial( {map: texturePluto } );
 var pluto = new THREE.Mesh( geometryPluto,materialPluto ); 
 pluto.position.y = 0;
-pluto.position.x = 40;
+pluto.position.x = 590;
 pluto.position.z = 0;
 scene.add( pluto );
 /*
@@ -229,13 +234,22 @@ var animate = function(){
     requestAnimationFrame(animate);            
 
     // para recorrer cada objeto de la scena (tambien incluye la camara)
-    scene.traverse(function(object){
-        if (object.isMesh == true){ // para evitar rotar la camara
-            object.rotation.y += 0.01;
-            //object.rotation.y += 0.01;
-        }
-    });
-
+    // scene.traverse(function(object){
+    //     if (object.isMesh == true){ // para evitar rotar la camara
+    //         object.rotation.y += 0.01;
+    //         //object.rotation.y += 0.01;
+    //     }
+    // });
+    sun.rotation.y += rotaciond[0];
+    mercury.rotation.y += rotaciond[1];
+    venus.rotation.y += rotaciond[2];
+    earth.rotation.y += rotaciond[3];
+    mars.rotation.y += rotaciond[4];
+    jupiter.rotation.y += rotaciond[5];
+    saturn.rotation.y += rotaciond[6];
+    uranus.rotation.y += rotaciond[7];
+    neptune.rotation.y += rotaciond[8];
+    pluto.rotation.y += rotaciond[9];
     //circle.rotation 
     renderer.render( scene, camera );
 }
