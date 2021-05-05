@@ -37,12 +37,12 @@ class ColorGUIHelper {
 * camera        
 */
 var camera = new THREE.PerspectiveCamera(
-    75, // angulo
+    102, // angulo
     window.innerWidth/window.innerHeight, // aspect, es lo que ve la camara
     0.5, // near
     2000 // far
 );  
-camera.position.z = 20;
+camera.position.z = 50;
 
 
 /*
@@ -55,12 +55,31 @@ scene.background =  new THREE.TextureLoader().load( 'textures/estrellas.jpg' );
 * mesh
 */
 /*
+* ring 
+*/
+
+function createRing(distanceAxi,thetaSegments) {
+    const geometryRing = new THREE.RingGeometry( distanceAxi,distanceAxi-0.02, thetaSegments );
+    const materialRing = new THREE.MeshBasicMaterial( { color: 0xffffff, side: THREE.DoubleSide } );
+    const ring  = new THREE.Mesh( geometryRing, materialRing );
+    
+    ring.position.set(0, 0, 0);
+    ring.rotation.x = Math.PI / 2;
+    scene.add(ring);
+
+}
+
+/*
 * sphere
 */
 var geometrySun = new THREE.SphereGeometry(3, 32, 32);        
-//var material = new THREE.MeshBasicMaterial( {color:0x00ff00, wireframe: true} );
 const textureSun = new THREE.TextureLoader().load( 'textures/8k_sun.jpg' );
-var materialSun = new THREE.MeshPhongMaterial( {map: textureSun } );
+//var materialSun = new THREE.MeshPhongMaterial( {map: textureSun ,transparent: true});
+const materialSun = new THREE.MeshBasicMaterial({
+    map: textureSun,
+    transparent: true,
+  });
+
 var sun = new THREE.Mesh( geometrySun,materialSun ); 
 sun.position.y = 0;
 sun.position.x = 0;
@@ -156,6 +175,16 @@ pluto.position.y = 0;
 pluto.position.x = 590;
 pluto.position.z = 0;
 scene.add( pluto );
+
+var geometryMoon = new THREE.SphereGeometry(0.3, 32, 32);        
+const textureMoon = new THREE.TextureLoader().load( 'textures/moon.jpg' );
+var materialPluto= new THREE.MeshPhongMaterial( {map: textureMoon } );
+var moon = new THREE.Mesh( geometryMoon,materialPluto ); 
+pluto.position.y = 0;
+pluto.position.x = 15.2;
+pluto.position.z = 0;
+scene.add( moon );
+
 /*
 * axis        
 */
@@ -176,28 +205,53 @@ scene.add(hemisphere_light);
 /*
 * DirectionalLight
 */
-const color = 0xFFFFFF;
-const intensity = 0.5;
-const light = new THREE.DirectionalLight(color, intensity);
-light.position.set(5, 10, 10);
-light.target.position.set(0, 0, 0);
-scene.add(light);
-scene.add(light.target);
+// const color = 0xFFFFFF;
+// const intensity = 0.5;
+// const light = new THREE.DirectionalLight(color, intensity);
+// light.position.set(5, 10, 10);
+// light.target.position.set(0, 0, 0);
+// scene.add(light);
+// scene.add(light.target);
 
-const helper = new THREE.DirectionalLightHelper(light);
+// const helper = new THREE.DirectionalLightHelper(light);
+// scene.add(helper);
+
+// function updateLight() {
+//     light.target.updateMatrixWorld();
+//     helper.update();
+// }
+// updateLight();        
+// // gui
+// const gui = new GUI();
+// gui.addColor(new ColorGUIHelper(light, 'color'), 'value').name('color');
+// gui.add(light, 'intensity', 0, 2, 0.01);
+// makeXYZGUI(gui, light.position, 'position', updateLight);
+// makeXYZGUI(gui, light.target.position, 'target', updateLight); 
+
+
+/*
+* PointLight
+*/
+const color = 0xFFFFFF;
+const intensity = 3;
+const light = new THREE.PointLight(color, intensity);
+light.position.set(0, 0, 0);
+scene.add(light);
+
+const helper = new THREE.PointLightHelper(light);
 scene.add(helper);
 
 function updateLight() {
-    light.target.updateMatrixWorld();
     helper.update();
 }
-updateLight();        
-// gui
+updateLight();
+
 const gui = new GUI();
 gui.addColor(new ColorGUIHelper(light, 'color'), 'value').name('color');
-gui.add(light, 'intensity', 0, 2, 0.01);
+gui.add(light, 'intensity', 0, 5, 0.01);
+gui.add(light, 'distance', 0, 40).onChange(updateLight);
+
 makeXYZGUI(gui, light.position, 'position', updateLight);
-makeXYZGUI(gui, light.target.position, 'target', updateLight); 
 
 /*
 * renderer
@@ -212,8 +266,8 @@ renderer.render( scene, camera );
 */
 // var controls = new THREE.OrbitControls( camera, renderer.domElement );
 var controls = new OrbitControls( camera, renderer.domElement );
-controls.minDistance = 3; // minima distancia a q puede hacer zoom
-controls.maxDistance = 10;// maxima distancia a q puede hacer zoom
+controls.minDistance = 0; // minima distancia a q puede hacer zoom
+controls.maxDistance = 20;// maxima distancia a q puede hacer zoom
 
 /*
 * para que el renderer se actualize al redimensionar el navegador
@@ -226,6 +280,9 @@ function redimensionar(){
     renderer.setSize( window.innerWidth, window.innerHeight );
     renderer.render( scene, camera );
 }
+
+
+
 /*
 * para controlar la animacion
 */
@@ -234,22 +291,24 @@ function redimensionar(){
 var clock = new THREE.Clock();
 var time = 0;
 var delta = 0;
-function movePlanets(dataPlanet,time,daybyOrbit,velocity,distanciaAxis){
+function movePlanets(dataPlanet,time,daybyOrbit,velocity,distanceAxis){
  
     //earth.rotation.x = time * 4;
-    dataPlanet.position.x = Math.cos(time*(1.0/daybyOrbit*velocity)+10) * distanciaAxis;
-    dataPlanet.position.z =Math.sin(time*(1.0/daybyOrbit*velocity)+10) * distanciaAxis;
+    dataPlanet.position.x = Math.cos(time*(1.0/daybyOrbit*velocity)+10) * distanceAxis;
+    dataPlanet.position.z =Math.sin(time*(1.0/daybyOrbit*velocity)+10) * distanceAxis;
 
+}
+function moveSatelite(dataSatelite,dataPlanet,time,daybyOrbit,velocity,distanceAxis){
+    movePlanets(dataSatelite,time,daybyOrbit,velocity,distanceAxis);
+    dataSatelite.position.x = dataSatelite.position.x + dataPlanet.position.x;
+    dataSatelite.position.z = dataSatelite.position.z + dataPlanet.position.z;
+    dataSatelite.rotation.y += 0.01;
 }
 
 var animate = function(){
     requestAnimationFrame(animate);   
     //earth         
     delta = clock.getDelta();
-    // console.log("delta");
-    // console.log(delta);
-    // console.log("timer");
-    // console.log(time);
     time += delta;
     // earth.position.x = Math.cos(time*(1.0/366*200)+10) * 14.9;
     // earth.position.z = Math.sin(time*(1.0/366*200)+10)*14.9;
@@ -257,6 +316,7 @@ var animate = function(){
     movePlanets(mercury,time,88,47.87,5.8);
     movePlanets(venus,time,225,53.02,10.8);
     movePlanets(earth,time,366,29.78 ,14.9);
+    moveSatelite(moon,earth,time,29.5,1,1.6);
     movePlanets(mars,time,687,24.07,22.8);
     movePlanets(jupiter,time,4339,13.07,77.8);
     movePlanets(saturn,time,10752,9.69,142.6);
@@ -280,3 +340,12 @@ var animate = function(){
     renderer.render( scene, camera );
 }
 animate();
+
+createRing(5.8,100)
+createRing(10.8,100)
+createRing(14.9,100)
+createRing(22.8,100)
+createRing(77.8,100)
+createRing(142.6,100)
+createRing(449.8,100)
+createRing(590,100)
