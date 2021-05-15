@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="three.min.js"> </script> 
+    <script src="OrbitControls.js"> </script>
+
+    <script>    
+
+        var scene = new THREE.Scene();
+    
+        const frustumSize = 20;
+        const aspect = window.innerWidth / window.innerHeight;
+        camera = new THREE.OrthographicCamera( frustumSize * aspect / - 2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 2, 1, 500 );
+
+        camera.position.set( 0, 0, 10 );
+
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        document.body.appendChild( renderer.domElement );
+        
+
+        //cube
+        var geometrySquare = new THREE.BoxGeometry(2,2,2,3,3,3);        
+        var materialSquare = new THREE.MeshBasicMaterial( {color:0xffffff} );
+        var meshSquare = new THREE.Mesh( geometrySquare, materialSquare );
+        meshSquare.position.y = 5;  
+        scene.add(meshSquare);
+        //scene.add(triangle);
+        //triangle
+        const geometryTriangle = new THREE.CylinderGeometry( 2, 0, -2, 3 );
+        const materialTriangle = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+        const meshTriangle = new THREE.Mesh( geometryTriangle, materialTriangle );
+        meshTriangle.position.y = 7;  
+        scene.add( meshTriangle );
+
+
+        const traslDown = new THREE.Matrix4 () ;
+        traslDown.set (
+        1, 0, 0, 0,
+        0, 1, 0,-0.02,
+        0, 0, 1, 0,
+        0, 0, 0, 1
+        );
+        
+        const traslRight = new THREE.Matrix4 () ;
+        traslRight.set (
+        1, 0, 0,0.12,
+        0, 1, 0, 0,
+        0, 0, 1, 0,
+        0, 0, 0, 1
+        );
+
+        var value = 1.57
+        const rotacionz = new THREE . Matrix4 () ;
+        rotacionz . set (
+        Math.cos(value), -Math.sin(value), 0, 0,
+        Math.sin(value),Math.cos(value), 0, 0,
+        0, 0, 1, 0,
+        0, 0, 0, 1
+        );
+
+
+        const axesHelper = new THREE.AxesHelper( 15 );
+        scene.add( axesHelper );     
+
+        renderer.render( scene, camera );
+
+        
+        //  para los controles del mouse
+        var controls = new THREE.OrbitControls( camera, renderer.domElement );
+        // controls.minDistance = 3; // minima distancia a q puede hacer zoom
+        // controls.maxDistance = 10; // maxima distancia a q puede hacer zoom
+       
+        // para que el renderer se actualize al redimensionar el navegador
+        window.addEventListener('resize', redimensionar);
+        function redimensionar(){
+            // actualizamos las vcariables que dependen del tamanio delñ navegador
+            camera.aspect = window.innerWidth/window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize( window.innerWidth, window.innerHeight );
+            renderer.render( scene, camera );
+        }
+
+        var h = 0;
+        var g = 0;
+        var min  = 0.17;
+        var animate = function(){
+            id = requestAnimationFrame(animate);
+            // console.log(h);
+            if ( g == min){
+                meshTriangle.geometry.applyMatrix4( rotacionz );
+            }
+            if(h < 2.5){
+                meshSquare.geometry.applyMatrix4( traslDown );             
+            }
+            else if(h < 3.5){
+                meshSquare.geometry.applyMatrix4( traslRight );
+            }
+            if(g < 3.6){
+                meshTriangle.geometry.applyMatrix4( traslDown );
+            }else if(g < 4.41){
+                meshTriangle.geometry.applyMatrix4( traslRight );
+                // cancelAnimationFrame(animate)
+            }
+        
+            h +=0.01;
+            g +=0.01;
+            renderer.render( scene, camera );
+        }
+        animate();
+    </script>    
+
+</body>
+</html>
