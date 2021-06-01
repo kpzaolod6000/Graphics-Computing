@@ -1,0 +1,16 @@
+/home/vicente/cursos/COMPUTER_GRAPHICS/code/opengl/build/CMakeFiles/rebuild_cache.dir
+/home/vicente/cursos/COMPUTER_GRAPHICS/code/opengl/build/CMakeFiles/edit_cache.dir
+/home/vicente/cursos/COMPUTER_GRAPHICS/code/opengl/build/src/CMakeFiles/rebuild_cache.dir
+/home/vicente/cursos/COMPUTER_GRAPHICS/code/opengl/build/src/CMakeFiles/edit_cache.dir
+/home/vicente/cursos/COMPUTER_GRAPHICS/code/opengl/build/src/01_hello_glew/CMakeFiles/rebuild_cache.dir
+/home/vicente/cursos/COMPUTER_GRAPHICS/code/opengl/build/src/01_hello_glew/CMakeFiles/edit_cache.dir
+/home/vicente/cursos/COMPUTER_GRAPHICS/code/opengl/build/src/01_hello_glew/CMakeFiles/01_hello_glew.dir
+/home/vicente/cursos/COMPUTER_GRAPHICS/code/opengl/build/src/02_shader_point/CMakeFiles/edit_cache.dir
+/home/vicente/cursos/COMPUTER_GRAPHICS/code/opengl/build/src/02_shader_point/CMakeFiles/rebuild_cache.dir
+/home/vicente/cursos/COMPUTER_GRAPHICS/code/opengl/build/src/02_shader_point/CMakeFiles/02_shader_point.dir
+/home/vicente/cursos/COMPUTER_GRAPHICS/code/opengl/build/src/03_catch_errors/CMakeFiles/rebuild_cache.dir
+/home/vicente/cursos/COMPUTER_GRAPHICS/code/opengl/build/src/03_catch_errors/CMakeFiles/edit_cache.dir
+/home/vicente/cursos/COMPUTER_GRAPHICS/code/opengl/build/src/03_catch_errors/CMakeFiles/03_catch_errors.dir
+/home/vicente/cursos/COMPUTER_GRAPHICS/code/opengl/build/src/04_shader_file/CMakeFiles/rebuild_cache.dir
+/home/vicente/cursos/COMPUTER_GRAPHICS/code/opengl/build/src/04_shader_file/CMakeFiles/edit_cache.dir
+/home/vicente/cursos/COMPUTER_GRAPHICS/code/opengl/build/src/04_shader_file/CMakeFiles/04_shader_file.dir

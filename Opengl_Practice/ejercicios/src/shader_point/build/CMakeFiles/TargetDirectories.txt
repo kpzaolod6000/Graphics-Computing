@@ -1,0 +1,3 @@
+/home/judal/Documentos/COMPUTACION/Graphics-Computing/Opengl Practice/ejercicios/src/shader_point/build/CMakeFiles/rebuild_cache.dir
+/home/judal/Documentos/COMPUTACION/Graphics-Computing/Opengl Practice/ejercicios/src/shader_point/build/CMakeFiles/edit_cache.dir
+/home/judal/Documentos/COMPUTACION/Graphics-Computing/Opengl Practice/ejercicios/src/shader_point/build/CMakeFiles/shader_point.dir

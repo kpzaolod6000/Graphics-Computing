@@ -1,0 +1,7 @@
+/home/judal/Documentos/COMPUTACION/Graphics-Computing/opengl/build_linux/CMakeFiles/rebuild_cache.dir
+/home/judal/Documentos/COMPUTACION/Graphics-Computing/opengl/build_linux/CMakeFiles/edit_cache.dir
+/home/judal/Documentos/COMPUTACION/Graphics-Computing/opengl/build_linux/src/CMakeFiles/rebuild_cache.dir
+/home/judal/Documentos/COMPUTACION/Graphics-Computing/opengl/build_linux/src/CMakeFiles/edit_cache.dir
+/home/judal/Documentos/COMPUTACION/Graphics-Computing/opengl/build_linux/src/01_hello_glew/CMakeFiles/rebuild_cache.dir
+/home/judal/Documentos/COMPUTACION/Graphics-Computing/opengl/build_linux/src/01_hello_glew/CMakeFiles/edit_cache.dir
+/home/judal/Documentos/COMPUTACION/Graphics-Computing/opengl/build_linux/src/01_hello_glew/CMakeFiles/01_hello_glew.dir

@@ -1,0 +1,10 @@
+mkdir build
+cd build
+cmake ../src/0_hello_glew
+make
+
+
+
+para borrar
+es 
+rm -rf build_linux/

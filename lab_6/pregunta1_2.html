@@ -7,8 +7,8 @@
     <title>Document</title>
 </head>
 <body>
-    <script src="three.min.js"> </script> 
-    <script src="three.js"> </script> 
+    <script src="three.min.js"> </script
+    
     <script src="OrbitControls.js"> </script> 
 
     <script>    
@@ -31,7 +31,7 @@
         document.body.appendChild( renderer.domElement );
         
         //triangle 
-        /*const geom  = new THREE.Geometry();
+        const geom  = new THREE.Geometry();
         var v1 = new THREE.Vector3(0,0,0);
         var v2 = new THREE.Vector3(30,0,0);
         var v3 = new THREE.Vector3(30,15,0);
@@ -43,7 +43,7 @@
         geom.faces.push( new THREE.Face3( 0, 1, 2 ) );
         geom.computeFaceNormals();
 
-        var triangle= new THREE.Mesh( geom, new THREE.MeshNormalMaterial() );*/
+        var triangle= new THREE.Mesh( geom, new THREE.MeshNormalMaterial() );
 
 
         //cube
@@ -59,8 +59,8 @@
         const traslacion = new THREE.Matrix4 () ;
         traslacion.set (
         1, 0, 0,0.01,
-        0, 1, 0,0,
-        0, 0, 1, -0.02,
+        0, 1, 0,-0.02,
+        0, 0, 1, 0,
         0, 0, 0, 1
         );
 
@@ -92,6 +92,7 @@
     
             renderer.render( scene, camera );
         }
+        animate();
 
         /*windowvar animate = function(){
             requestAnimationFrame(animate);            
