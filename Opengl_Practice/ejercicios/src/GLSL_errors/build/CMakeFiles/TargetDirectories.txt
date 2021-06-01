@@ -1,0 +1,3 @@
+/home/judal/Documentos/COMPUTACION/Graphics-Computing/Opengl_Practice/ejercicios/src/GLSL_errors/build/CMakeFiles/rebuild_cache.dir
+/home/judal/Documentos/COMPUTACION/Graphics-Computing/Opengl_Practice/ejercicios/src/GLSL_errors/build/CMakeFiles/edit_cache.dir
+/home/judal/Documentos/COMPUTACION/Graphics-Computing/Opengl_Practice/ejercicios/src/GLSL_errors/build/CMakeFiles/GLSL_error.dir

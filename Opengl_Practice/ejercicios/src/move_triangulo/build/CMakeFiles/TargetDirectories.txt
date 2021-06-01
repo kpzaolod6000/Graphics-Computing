@@ -1,0 +1,3 @@
+/home/judal/Documentos/COMPUTACION/Graphics-Computing/Opengl_Practice/ejercicios/src/move_triangulo/build/CMakeFiles/rebuild_cache.dir
+/home/judal/Documentos/COMPUTACION/Graphics-Computing/Opengl_Practice/ejercicios/src/move_triangulo/build/CMakeFiles/edit_cache.dir
+/home/judal/Documentos/COMPUTACION/Graphics-Computing/Opengl_Practice/ejercicios/src/move_triangulo/build/CMakeFiles/move_triangulo.dir
