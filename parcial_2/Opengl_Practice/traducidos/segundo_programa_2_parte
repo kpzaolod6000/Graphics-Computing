@@ -1,0 +1,27 @@
+Como vimos anteriormente, después de que init () finaliza, se llama a display (). Una de las primeras cosas que hace display () es llamar glUseProgram (), que carga el programa que contiene los dos sombreadores compilados en las etapas de la canalización de OpenGL (¡en la GPU!). Tenga en cuenta que glUseProgram () no ejecuta los sombreadores, solo los carga en el hardware.
+Como veremos más adelante en el Capítulo 4, normalmente en este punto el programa C ++ / OpenGL prepararía los vértices del modelo que se está dibujando para enviarlo por la tubería. Pero no en este caso, porque para nuestro primer programa de sombreado simplemente codificamos un solo vértice en el sombreador de vértices. Por lo tanto, en este ejemplo, la función display () procede a continuación a la llamada glDrawArrays (), que inicia el procesamiento de la canalización. El tipo primitivo es GL_POINTS y ​​solo hay un punto para mostrar. Ahora veamos los sombreadores en sí, mostrados en verde anteriormente (y duplicados en las explicaciones que siguen). Como vimos, se han declarado en el programa C ++ / OpenGL como matrices de cadenas. Esta es una forma torpe de codificar, pero es suficiente en este caso tan simple. El sombreador de vértices es:
+# versión 430
+vacío principal (vacío)
+{gl_Position = vec4 (0.0, 0.0, 0.0, 1.0); }
+
+La primera línea indica la versión de OpenGL, en este caso 4.3. Sigue una función "principal" (como veremos, GLSL es algo parecido a C ++ en sintaxis). El propósito principal de cualquier sombreador de vértices es enviar un vértice por la tubería (que, como se mencionó anteriormente, lo hace para cada vértice). La variable incorporada gl_Position se utiliza para establecer la posición de las coordenadas de un vértice en el espacio 3D y se envía a la siguiente etapa de la canalización. El tipo de datos GLSL vec4 se usa para contener una tupla de 4, adecuada para tales coordenadas, con los cuatro valores asociados que representan X, Y, Z y un cuarto valor establecido aquí en 1.0 (aprenderemos el propósito de este cuarto valor en el capítulo 3).
+En este caso, el vértice está codificado en la ubicación de origen (0,0,0).
+
+Los vértices se mueven a través de la tubería hasta el rasterizador, donde se transforman en ubicaciones de píxeles (o más exactamente, fragmentos; esto se describe más adelante).
+Finalmente, estos píxeles (fragmentos) llegan al sombreador de fragmentos:
+# versión 430
+color vec4;
+vacío principal (vacío)
+{color = vec4 (0.0, 0.0, 1.0, 1.0); }
+
+El propósito de cualquier sombreador de fragmentos es establecer el color RGB de un píxel que se mostrará. En este caso, el color de salida especificado (0, 0, 1) es azul (el cuarto valor 1.0 especifica el nivel de opacidad). Tenga en cuenta la etiqueta "out" que indica que el color variable es una salida. (No fue necesario especificar una etiqueta "out" para gl_Position en el sombreador de vértices, porque gl_Position es una variable de salida predefinida).
+Hay un detalle en el código que no hemos discutido, en las dos últimas líneas de la función init () (mostrada en rojo). Probablemente parezcan un poco crípticos. Como veremos en el Capítulo 4, cuando se preparan conjuntos de datos para enviarlos por la tubería, se organizan en búferes. Esos búferes se organizan a su vez en Vertex Array Objects (VAO). En nuestro ejemplo, codificamos un solo punto en el sombreador de vértices, por lo que no necesitamos búferes. Sin embargo, OpenGL aún requiere que se cree al menos un VAO cada vez que se usan sombreadores, incluso si la aplicación no usa búfer. Entonces, las dos líneas crean el VAO requerido.
+Finalmente, está el problema de cómo el vértice que salió del sombreador de vértices se convirtió en un píxel en el sombreador de fragmentos. Recuerde de la Figura 2.2 que entre el procesamiento de vértices y el procesamiento de píxeles está la etapa de rasterización. Es allí donde las primitivas (como puntos o triángulos) se convierten en conjuntos de píxeles. El tamaño predeterminado de un "punto" OpenGL es un píxel, por eso nuestro único punto se renderizó como un solo píxel.
+
+Agreguemos el siguiente comando en display (), justo antes del
+llamada glDrawArrays ():
+glPointSize (30.0f);
+Ahora, cuando el rasterizador recibe el vértice del sombreador de vértices, establecerá valores de color de píxeles que forman un punto que tiene un tamaño de 30 píxeles. La salida resultante se muestra en la Figura 2.5.
+
+
+Continuemos ahora examinando el resto de la canalización de OpenGL.

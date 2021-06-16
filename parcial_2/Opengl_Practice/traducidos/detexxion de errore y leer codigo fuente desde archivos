@@ -1,0 +1,27 @@
+DETECTANDO ERRORES OPENGL Y GLSL
+El flujo de trabajo para compilar y ejecutar código GLSL difiere de la codificación estándar, en que la compilación GLSL ocurre en tiempo de ejecución de C ++. Otra complicación es que el código GLSL no se ejecuta en la CPU (se ejecuta en la GPU), por lo que el sistema operativo no siempre puede detectar errores de tiempo de ejecución de OpenGL. Esto dificulta la depuración, porque a menudo es difícil detectar si un sombreador falló y por qué.
+El programa 2.3 (que sigue) presenta algunos módulos para detectar y mostrar errores GLSL. Hacen uso de las funciones de OpenGL glGetShaderiv () y glGetProgramiv (), que se utilizan para proporcionar información sobre programas y sombreadores GLSL compilados. Acompañándolos está la función createShaderProgram () del Programa 2.2 anterior, pero con las llamadas de detección de errores agregadas.
+
+El programa 2.3 contiene las siguientes tres utilidades:
+• checkOpenGLError: comprueba el indicador de error de OpenGL en busca de un error de OpenGL
+
+• printShaderLog: muestra el contenido del registro de OpenGL cuando falla la compilación de GLSL
+
+• printProgramLog: muestra el contenido del registro de OpenGL cuando falla el enlace GLSL
+
+El primero, checkOpenGLError (), es útil para detectar errores de compilación GLSL y errores de tiempo de ejecución de OpenGL, por lo que se recomienda encarecidamente utilizarlo en una aplicación C ++ / OpenGL durante el desarrollo. Por ejemplo, en el ejemplo anterior (Programa 2.2), las llamadas a glCompileShader () y glLinkProgram () podrían aumentarse fácilmente con el código que se muestra en el Programa 2.3 para asegurar que cualquier error tipográfico u otro error de compilación se detecte y se informe su causa. Las llamadas a checkOpenGLError () podrían agregarse después de las llamadas OpenGL en tiempo de ejecución, como inmediatamente después de la llamada a glDrawArrays ().
+Otra razón por la que es importante utilizar estas herramientas es que un error GLSL no hace que el programa C ++ se detenga. Entonces, a menos que el programador tome medidas para detectar errores en el momento en que ocurren, la depuración será muy difícil.
+
+//código
+
+Existen otros trucos para deducir las causas de los errores de tiempo de ejecución en el código de sombreado. Un resultado común de los errores de tiempo de ejecución del sombreador es que la pantalla de salida esté completamente en blanco, esencialmente sin salida. Esto puede suceder incluso si el error es un error tipográfico muy pequeño en un sombreador, pero puede ser difícil saber en qué etapa de la canalización se produjo el error. Sin ningún resultado, es como buscar una aguja en un pajar.
+
+Un truco útil en tales casos es reemplazar temporalmente el sombreador de fragmentos con el que se muestra en el Programa 2.2. Recuerde que en ese ejemplo, el sombreador de fragmentos simplemente genera un color en particular, por ejemplo, azul sólido. Si la salida posterior tiene la forma geométrica correcta (pero azul sólido), el sombreador de vértices probablemente sea correcto y hay un error en el sombreador de fragmentos original. Si la salida sigue siendo una pantalla en blanco, es más probable que el error se produzca antes en la canalización, como en el sombreador de vértices.
+En el Apéndice C mostramos cómo usar otra herramienta de depuración útil llamada Nsight, que está disponible para máquinas equipadas con ciertas tarjetas gráficas Nvidia.
+
+
+LEER EL CÓDIGO FUENTE GLSL DE LOS ARCHIVOS
+
+Hasta ahora, nuestro código de sombreado GLSL se ha almacenado en línea en cadenas. A medida que nuestros programas crezcan en complejidad, esto se volverá impráctico. En su lugar, deberíamos almacenar nuestro código de sombreado en archivos y leerlos.
+La lectura de archivos de texto es una habilidad básica de C ++ y no se tratará aquí. Sin embargo, por razones prácticas, el código para leer sombreadores se proporciona en readShaderSource (), que se muestra en el Programa 2.4. Lee el archivo de texto del sombreador y devuelve una matriz de cadenas, donde cada cadena es una línea de texto del archivo. Luego determina el tamaño de esa matriz en función de la cantidad de líneas leídas. Tenga en cuenta que aquí, createShaderProgram () reemplaza la versión del Programa 2.2.
+En este ejemplo, el código del sombreador de vértices y fragmentos ahora se coloca en los archivos de texto "vertShader.glsl" y "fragShader.glsl" respectivamente.

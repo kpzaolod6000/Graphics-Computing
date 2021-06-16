@@ -1,0 +1,15 @@
+Rasterización
+
+En última instancia, nuestro mundo 3D de vértices, triángulos, colores, etc. debe mostrarse en un monitor 2D. Esa pantalla de monitor 2D está formada por una trama: una matriz rectangular de píxeles.
+Cuando se rasteriza un objeto 3D, OpenGL convierte las primitivas en el objeto (generalmente triángulos) en fragmentos. Un fragmento contiene la información asociada con un píxel. La rasterización determina las ubicaciones de los píxeles que deben dibujarse para producir el triángulo especificado por sus tres vértices.
+La rasterización comienza interpolando, por pares, entre los tres vértices del triángulo. Hay algunas opciones para realizar esta interpolación; por ahora es suficiente considerar la interpolación lineal simple como se muestra en la Figura 2.9. Los tres vértices originales se muestran en rojo.
+Si la rasterización se detuviera aquí, la imagen resultante aparecería como estructura alámbrica. Esta es una opción en OpenGL, agregando el siguiente comando en la función display (), antes de la llamada a glDrawArrays ():
+
+glPolygonMode (GL_FRONT_AND_BACK, GL_LINE);
+
+Si el toro que se mostró anteriormente en la Sección 2.1.4 se renderiza con la adición de esta línea de código, aparece como se muestra en la Figura 2.10.
+
+Si no insertamos la línea de código anterior (o si GL_FILL ha sido
+especificado en lugar de GL_LINE), la interpolación continuaría a lo largo de las líneas ráster y llenaría el interior del triángulo, como se muestra en la Figura 2.11. Cuando se aplica al toro, esto da como resultado el toro completamente rasterizado o "sólido" que se muestra en la Figura 2.12 (a la izquierda).
+Tenga en cuenta que, en este caso, la forma general y la curvatura del toro no son evidentes; eso se debe a que no hemos incluido ninguna técnica de texturización o iluminación, por lo que parece "plano". A la derecha, se muestra el mismo toro "plano" con el renderizado de estructura alámbrica superpuesto. El toro mostrado anteriormente en la Figura 2.7 incluía efectos de iluminación y, por lo tanto, reveló la forma del toro con mucha más claridad. Estudiaremos la iluminación en el Capítulo 7.
+Como veremos en capítulos posteriores, el rasterizador puede interpolar más que solo píxeles. Cualquier variable generada por el sombreador de vértices e introducida por el sombreador de fragmentos se interpolará en función de la posición de píxel correspondiente. Usaremos esta capacidad para generar gradaciones de color suaves, lograr una iluminación realista y muchos más efectos.

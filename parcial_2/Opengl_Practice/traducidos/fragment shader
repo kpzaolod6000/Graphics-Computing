@@ -1,0 +1,27 @@
+Shader de fragmentos
+
+Como se mencionó anteriormente, el propósito del sombreador de fragmentos es asignar colores a los píxeles rasterizados. Ya hemos visto un ejemplo de un sombreador de fragmentos en
+Programa 2.2. Allí, el sombreador de fragmentos simplemente codificó su salida a un valor específico, por lo que cada píxel generado tenía el mismo color. Sin embargo, GLSL nos brinda una creatividad prácticamente ilimitada para calcular los colores de otras formas.
+Un ejemplo simple sería basar el color de salida de un píxel en su ubicación. Recuerde que en el sombreador de vértices, las coordenadas de salida de un vértice se especifican mediante la variable predefinida gl_Position. En el sombreador de fragmentos, hay una variable similar disponible para el programador para acceder a las coordenadas de un fragmento entrante, llamado gl_FragCoord. Podemos modificar el sombreador de fragmentos de
+Programe 2.2 para que use gl_FragCoord (en este caso haciendo referencia a su componente x usando la notación del selector de campo GLSL) para establecer el color de cada píxel en función de su ubicación, como se muestra aquí:
+
+versión 430
+color vec4;
+vacío principal (vacío)
+{if (gl_FragCoord.x <200) color = vec4 (1.0, 0.0, 0.0, 1.0); else color = vec4 (0.0, 0.0, 1.0, 1.0);
+}
+
+Suponiendo que aumentamos GL_PointSize como hicimos al final de la Sección 2.1.2, los colores de los píxeles ahora variarán a lo largo del punto renderizado: rojo donde las coordenadas x son menores que 200 y azul en caso contrario, como se ve en la Figura 2.13.
+
+Operaciones de píxeles
+Como los objetos en nuestra escena se dibujan en la función display () usando el comando glDrawArrays (), generalmente esperamos que los objetos al frente bloqueen nuestra vista de los objetos detrás de ellos. Esto también se extiende a los objetos mismos, en los que esperamos ver el frente de un objeto, pero generalmente no la parte posterior.
+Para lograr esto, necesitamos la eliminación de superficies ocultas o HSR. OpenGL puede realizar una variedad de operaciones HSR, dependiendo del efecto que queramos en nuestra escena. Y aunque esta fase no es programable, es extremadamente importante que entendamos cómo funciona. No solo necesitaremos configurarlo correctamente, sino que más tarde tendremos que manipularlo con cuidado cuando agreguemos sombras a nuestra escena.
+La eliminación de superficies ocultas se logra mediante OpenGL mediante el uso hábilmente coordinado de dos búferes: el búfer de color (que hemos discutido anteriormente) y el búfer de profundidad (a veces llamado búfer Z). Ambos búferes tienen el mismo tamaño que el ráster, es decir, hay una entrada en cada búfer para cada píxel de la pantalla.
+A medida que se dibujan varios objetos en una escena, el sombreador de fragmentos genera colores de píxeles. Los colores de los píxeles se colocan en el búfer de color; es el búfer de color el que finalmente se escribe en la pantalla. Cuando varios objetos ocupan algunos de los mismos píxeles en el búfer de color, se debe determinar qué color (es) de píxeles se retienen, en función de qué objeto está más cerca del espectador.
+La eliminación de superficies ocultas se realiza de la siguiente manera:
+• Antes de renderizar una escena, el búfer de profundidad se llena con valores que representan la profundidad máxima.
+• A medida que el sombreador de fragmentos emite un color de píxel, se calcula su distancia desde el espectador.
+• Si la distancia calculada es menor que la distancia almacenada en el búfer de profundidad (para ese píxel), entonces: (a) el color del píxel reemplaza al color en el búfer de color y (b) la distancia reemplaza el valor en el búfer de profundidad .
+De lo contrario, el píxel se descarta.
+
+Este procedimiento se denomina algoritmo de búfer Z, como se expresa en la Figura 2.14.

@@ -1,0 +1,3 @@
+/home/judal/Documentos/COMPUTACION/Graphics-Computing/Opengl_Practice/ejercicios/src/triangulo_isosceles/build/CMakeFiles/rebuild_cache.dir
+/home/judal/Documentos/COMPUTACION/Graphics-Computing/Opengl_Practice/ejercicios/src/triangulo_isosceles/build/CMakeFiles/edit_cache.dir
+/home/judal/Documentos/COMPUTACION/Graphics-Computing/Opengl_Practice/ejercicios/src/triangulo_isosceles/build/CMakeFiles/triangulo_isosceles.dir

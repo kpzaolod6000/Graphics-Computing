@@ -1,0 +1,27 @@
+Mientras que 
+* el sombreador de vértices le da al programador la capacidad de manipular un vértice a la vez (es decir, procesamiento "pervertex"), 
+
+* y el sombreador de fragmentos (como veremos) permite manipular un píxel en una vez 
+(procesamiento de "perfragmento"),
+
+* el sombreador de geometría proporciona la capacidad de manipular una primitiva a la vez: procesamiento "por primitiva".El sombreador de geometría hace que los tres vértices de cada triángulo sean accesibles al programador simultáneamente.
+
+*las etapas de teselación dan al programador acceso a todos los vértices de un modelo completo simultáneamente. (Los primitivos se pueden alterar, por ejemplo, estirándolos encogiéndolos.)
+
+
+La diferencia es que el teselado solo ofrece esta capacidad en circunstancias muy limitadas, específicamente cuando el modelo es una cuadrícula de triángulos generada por el teselador. No proporciona tal acceso simultáneo a todos los vértices de, digamos, un modelo arbitrario que se envía desde C ++ a través de un búfer.
+
+
+Mosaico
+Cubrimos la teselación en el Capítulo 12. La etapa de teselación programable es una de las adiciones más recientes a OpenGL (en la versión 4.0). Proporciona un teselador que puede generar una gran cantidad de triángulos, generalmente como una cuadrícula, y también algunas herramientas para manipular esos triángulos de diversas formas. Por ejemplo, el programador podría manipular una cuadrícula de triángulos teselados como se muestra en la Figura 2.6.
+La teselación es útil cuando se necesitan muchos vértices en lo que de otro modo sería una forma simple, como un área cuadrada o una superficie curva. También es muy útil para generar terrenos complejos, como veremos más adelante. En tales casos, a veces es mucho más eficiente que el teselador en la GPU genere la malla triangular en hardware, en lugar de hacerlo en C ++.
+
+Sombreador de geometría
+
+Cubrimos la etapa del sombreador de geometría en el Capítulo 13. Mientras que el sombreador de vértices le da al programador la capacidad de manipular un vértice a la vez (es decir, procesamiento "pervertex"), y el sombreador de fragmentos (como veremos) permite manipular un píxel en una vez (procesamiento de "perfragmento"), el sombreador de geometría proporciona la capacidad de manipular una primitiva a la vez: procesamiento "por primitiva".
+Recordando que la primitiva más común es el triángulo, para cuando hayamos alcanzado la etapa de geometría, la tubería debe haber terminado de agrupar los vértices en triángulos (un proceso llamado ensamblaje primitivo). El sombreador de geometría hace que los tres vértices de cada triángulo sean accesibles al programador simultáneamente.
+Hay varios usos para el procesamiento por primitiva. Los primitivos se pueden alterar, por ejemplo, estirándolos o encogiéndolos. Algunas de las primitivas podrían eliminarse, poniendo así "huecos" en el objeto que se está renderizando; esta es una forma de convertir un modelo simple en uno más complejo.
+El sombreador de geometría también proporciona un mecanismo para generar primitivas adicionales. Aquí también, esto abre la puerta a muchas posibilidades para convertir modelos simples en modelos más complejos.
+Un uso interesante del sombreador de geometría es agregar textura de superficie, como protuberancias o escamas, incluso "pelo" o "pelo", a un objeto. Considere, por ejemplo, el simple toro que se muestra en la Figura 2.7 (veremos cómo generarlo más adelante en el libro). La superficie de este toro está formada por cientos de triángulos. Si en cada triángulo usamos un sombreador de geometría para agregar triángulos adicionales que miran hacia afuera,
+obtenemos el resultado que se muestra en la Figura 2.8. Este "toro escamoso" sería computacionalmente costoso intentar y modelar desde cero en el lado de la aplicación C ++ / OpenGL.
+Puede parecer redundante proporcionar una etapa de sombreado por primitiva cuando las etapas de teselación dan al programador acceso a todos los vértices de un modelo completo simultáneamente. La diferencia es que el teselado solo ofrece esta capacidad en circunstancias muy limitadas, específicamente cuando el modelo es una cuadrícula de triángulos generada por el teselador. No proporciona tal acceso simultáneo a todos los vértices de, digamos, un modelo arbitrario que se envía desde C ++ a través de un búfer.
