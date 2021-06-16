@@ -1,3 +1,3 @@
-/home/judal/Documentos/COMPUTACION/Graphics-Computing/Opengl_Practice/ejercicios/src/triangulo/build/CMakeFiles/rebuild_cache.dir
-/home/judal/Documentos/COMPUTACION/Graphics-Computing/Opengl_Practice/ejercicios/src/triangulo/build/CMakeFiles/edit_cache.dir
-/home/judal/Documentos/COMPUTACION/Graphics-Computing/Opengl_Practice/ejercicios/src/triangulo/build/CMakeFiles/triangulo.dir
+/home/judal/Documentos/COMPUTACION/Graphics-Computing/parcial_2/Opengl_Practice/ejercicios/src/triangulo/build/CMakeFiles/rebuild_cache.dir
+/home/judal/Documentos/COMPUTACION/Graphics-Computing/parcial_2/Opengl_Practice/ejercicios/src/triangulo/build/CMakeFiles/edit_cache.dir
+/home/judal/Documentos/COMPUTACION/Graphics-Computing/parcial_2/Opengl_Practice/ejercicios/src/triangulo/build/CMakeFiles/triangulo.dir

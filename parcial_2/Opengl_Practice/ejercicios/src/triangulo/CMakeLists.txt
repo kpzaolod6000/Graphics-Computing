@@ -49,7 +49,7 @@ ${DEPENDENCY_DIR}/include/glad/
 ${DEPENDENCY_DIR}/include/glfw/
 
 )
-message( "${DEPENDENCY_DIR}" ) #ver donde apunta esta weada
+message( "${DEPENDENCY_DIR}" ) #ver la ruta de esta weada
 message( "\nBuild mode test is: ${CMAKE_BUILD_TYPE}" )
 
 if ( CMAKE_BUILD_TYPE STREQUAL "Debug")

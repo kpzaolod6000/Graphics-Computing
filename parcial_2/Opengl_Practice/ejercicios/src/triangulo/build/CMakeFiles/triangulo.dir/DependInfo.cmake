@@ -5,7 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/judal/Documentos/COMPUTACION/Graphics-Computing/Opengl_Practice/ejercicios/src/triangulo/dep/include/glad/glad/glad.c" "/home/judal/Documentos/COMPUTACION/Graphics-Computing/Opengl_Practice/ejercicios/src/triangulo/build/CMakeFiles/triangulo.dir/dep/include/glad/glad/glad.c.o"
+  "/home/judal/Documentos/COMPUTACION/Graphics-Computing/parcial_2/Opengl_Practice/ejercicios/src/triangulo/dep/include/glad/glad/glad.c" "/home/judal/Documentos/COMPUTACION/Graphics-Computing/parcial_2/Opengl_Practice/ejercicios/src/triangulo/build/CMakeFiles/triangulo.dir/dep/include/glad/glad/glad.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 
@@ -15,7 +15,7 @@ set(CMAKE_C_TARGET_INCLUDE_PATH
   "../dep/include/glfw"
   )
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/judal/Documentos/COMPUTACION/Graphics-Computing/Opengl_Practice/ejercicios/src/triangulo/main.cpp" "/home/judal/Documentos/COMPUTACION/Graphics-Computing/Opengl_Practice/ejercicios/src/triangulo/build/CMakeFiles/triangulo.dir/main.cpp.o"
+  "/home/judal/Documentos/COMPUTACION/Graphics-Computing/parcial_2/Opengl_Practice/ejercicios/src/triangulo/main.cpp" "/home/judal/Documentos/COMPUTACION/Graphics-Computing/parcial_2/Opengl_Practice/ejercicios/src/triangulo/build/CMakeFiles/triangulo.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

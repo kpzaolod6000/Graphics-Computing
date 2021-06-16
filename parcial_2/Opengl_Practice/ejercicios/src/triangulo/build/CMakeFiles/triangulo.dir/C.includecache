@@ -18,7 +18,7 @@ stdint.h
 KHR/khrplatform.h
 -
 
-/home/judal/Documentos/COMPUTACION/Graphics-Computing/Opengl_Practice/ejercicios/src/triangulo/dep/include/glad/glad/glad.c
+/home/judal/Documentos/COMPUTACION/Graphics-Computing/parcial_2/Opengl_Practice/ejercicios/src/triangulo/dep/include/glad/glad/glad.c
 stdio.h
 -
 stdlib.h

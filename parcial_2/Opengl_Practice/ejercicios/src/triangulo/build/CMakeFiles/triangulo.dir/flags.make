@@ -7,11 +7,11 @@ C_FLAGS = -g
 
 C_DEFINES = 
 
-C_INCLUDES = -I/home/judal/Documentos/COMPUTACION/Graphics-Computing/Opengl_Practice/ejercicios/src/triangulo/dep/include/glad -I/home/judal/Documentos/COMPUTACION/Graphics-Computing/Opengl_Practice/ejercicios/src/triangulo/dep/include/glfw 
+C_INCLUDES = -I/home/judal/Documentos/COMPUTACION/Graphics-Computing/parcial_2/Opengl_Practice/ejercicios/src/triangulo/dep/include/glad -I/home/judal/Documentos/COMPUTACION/Graphics-Computing/parcial_2/Opengl_Practice/ejercicios/src/triangulo/dep/include/glfw 
 
 CXX_FLAGS = -g   -std=gnu++11
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/judal/Documentos/COMPUTACION/Graphics-Computing/Opengl_Practice/ejercicios/src/triangulo/dep/include/glad -I/home/judal/Documentos/COMPUTACION/Graphics-Computing/Opengl_Practice/ejercicios/src/triangulo/dep/include/glfw 
+CXX_INCLUDES = -I/home/judal/Documentos/COMPUTACION/Graphics-Computing/parcial_2/Opengl_Practice/ejercicios/src/triangulo/dep/include/glad -I/home/judal/Documentos/COMPUTACION/Graphics-Computing/parcial_2/Opengl_Practice/ejercicios/src/triangulo/dep/include/glfw 
 

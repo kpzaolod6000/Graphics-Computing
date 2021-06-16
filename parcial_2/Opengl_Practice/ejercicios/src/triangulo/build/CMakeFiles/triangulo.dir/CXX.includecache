@@ -62,7 +62,7 @@ GL/glext.h
 GL/glu.h
 -
 
-/home/judal/Documentos/COMPUTACION/Graphics-Computing/Opengl_Practice/ejercicios/src/triangulo/main.cpp
+/home/judal/Documentos/COMPUTACION/Graphics-Computing/parcial_2/Opengl_Practice/ejercicios/src/triangulo/main.cpp
 glad/glad.h
 -
 glfw/glfw3.h
