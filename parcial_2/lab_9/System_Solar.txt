@@ -1,0 +1,53 @@
+Hasta ahora, cada uno de los modelos que hemos renderizado se ha construido a partir de un único conjunto de vértices. Sin embargo, a menudo se desea construir modelos complejos ensamblando modelos más pequeños y simples. Por ejemplo, se podría crear un modelo de un “robot” dibujando por separado la cabeza, el cuerpo, las piernas y los brazos, donde cada uno de ellos es un modelo separado. Un objeto construido de esta manera a menudo se denomina modelo jerárquico. La parte complicada de construir modelos jerárquicos es realizar un seguimiento de todas las matrices de vista del modelo y asegurarse de que permanezcan perfectamente coordinadas; de lo contrario, ¡el robot podría volar en pedazos!
+Los modelos jerárquicos son útiles no solo para construir objetos complejos, sino que también pueden usarse para generar escenas complejas. Por ejemplo, considere cómo nuestro planeta Tierra gira alrededor del sol y, a su vez, cómo gira la luna alrededor de la Tierra. Tal escena se muestra en la Figura 4.11.5 Calcular la trayectoria real de la luna a través del espacio podría ser complejo. Sin embargo, si podemos combinar las transformaciones que representan los dos senderos circulares simples —el trayecto de la luna alrededor de la Tierra y el trayecto de la Tierra alrededor del sol— evitamos tener que calcular explícitamente la trayectoria de la luna.
+Resulta que podemos hacer esto con bastante facilidad con una pila de matrices. Una pila de matrices es, como su nombre lo indica, una pila de matrices de transformación. Como veremos, las pilas de matrices facilitan la creación y gestión de escenas y objetos jerárquicos complejos, donde las transformaciones se pueden construir sobre (y eliminar) otras transformaciones.
+OpenGL tiene una pila de matriz incorporada, pero como parte de la antigua tubería de función fija (no programable), ha estado en desuso durante mucho tiempo [OL16]. Sin embargo, la biblioteca de plantillas estándar de C ++ (STL) tiene una clase llamada "pila" que es relativamente sencilla de adaptar como una pila de matriz, utilizándola para construir una pila de mat4s.
+Como veremos, muchas de las matrices de modelo, vista y vista de modelo que normalmente se necesitarían en una escena compleja pueden reemplazarse por una sola instancia de la pila <glm :: mat4>.
+Primero examinaremos los comandos básicos para crear instancias y utilizar una pila de C ++, luego usaremos uno para construir una escena animada compleja. Usaremos la clase de pila C ++ de las siguientes formas
+
+push (): pone a disposición una nueva entrada en la parte superior de la pila. Normalmente usaremos este comando presionando una copia de la matriz que se encuentra actualmente en la parte superior de la pila, con la intención de concatenar transformaciones adicionales en la copia.
+• pop (): elimina (y devuelve) la matriz superior.
+• top (): devuelve una referencia a la matriz en la parte superior de la pila, sin eliminarla.
+• <stack> .top () * = rotar (parámetros para construir una matriz de rotación)
+• <stack> .top () * = scale (parámetros para construir una matriz de escala)
+• <stack> .top () * = translate (parámetros para construir una matriz de traducción)
+
+
+Como se muestra en la lista anterior, el operador "* =" está sobrecargado en mat4 para que pueda usarse para concatenar matrices. Por lo tanto, normalmente lo usaremos en una de las formas que se muestran para agregar traslaciones, rotaciones, etc. a la matriz en la parte superior de la pila de matrices.Ahora, en lugar de construir transformaciones creando instancias de mat4, usamos push ( ) para crear nuevas matrices en la parte superior de la pila. Las transformaciones deseadas se aplican luego según sea necesario a la matriz recién creada en la parte superior de la pila.
+La primera matriz que se coloca en la pila es con frecuencia la matriz VIEW. Las matrices por encima de ella son matrices de vista de modelo de complejidad creciente; es decir, tienen un número creciente de transformaciones de modelo que se les aplican. Estas transformadas se pueden aplicar directamente o concatenando primero otras matrices.
+En nuestro ejemplo de sistema planetario, la matriz colocada inmediatamente encima de la matriz VIEW sería la matriz MV del sol. La matriz en la parte superior de esa matriz sería la matriz MV de la tierra, que consiste en una copia de la matriz MV del sol con las transformaciones de la matriz del modelo de la Tierra aplicadas. Es decir, la matriz MV de la Tierra se construye incorporando las transformaciones del planeta en las transformadas del sol. De manera similar, la matriz MV de la luna se encuentra en la parte superior de la matriz MV del planeta y se construye aplicando las transformaciones de la matriz del modelo de la luna a la matriz MV del planeta inmediatamente debajo de ella.
+Después de representar la luna, se podría generar una segunda "luna" al "hacer estallar" la matriz de la primera luna de la pila (restaurando la parte superior de la pila a la matriz de vista del modelo del planeta) y luego repitiendo el proceso para la segunda luna.
+
+
+5 Sí, sabemos que la luna no gira en esta trayectoria "vertical" alrededor de la tierra, pero
+más bien en uno que es más coplanar con la revolución de la tierra alrededor del sol. Elegimos esta órbita
+para que la ejecución de nuestro programa sea más clara 
+
+El enfoque básico es el siguiente:
+
+1. Declaramos nuestra pila, dándole el nombre "mvStack".
+2. Cuando se crea un nuevo objeto relativo a un objeto padre, llame a “mvStack.push (mvStack.top ())”.
+3. Aplicar las transformaciones deseadas del nuevo objeto; es decir, multiplique una transformación deseada en él.
+4. Cuando un objeto o subobjeto haya terminado de dibujarse, llame a “mvStack.pop ()” para eliminar su matriz de vista de modelo de la parte superior de la pila de matrices.
+
+En capítulos posteriores aprenderemos cómo crear esferas y hacer que parezcan planetas y lunas. Por ahora, para simplificar las cosas, construiremos un "sistema planetario" usando nuestra pirámide y un par de cubos.
+Aquí hay una descripción general de cómo se organiza típicamente una función display () que usa una pila de matriz:
+ Empuje una nueva matriz en la pila (este será el MV principal
+matriz: para el primer padre, duplica la matriz de vista)
+
+Tenga en cuenta que la rotación de la pirámide ("sol") sobre su eje está en su propio espacio de coordenadas local, y no se debe permitir que afecte a los "niños" (el planeta y la luna, en este caso). Por lo tanto, la rotación del sol (que se muestra en la imagen a continuación) se empuja hacia la pila, pero luego, después de dibujar el sol, se debe quitar (sacar) de la pila.
+
+La revolución del gran cubo (planeta) alrededor del sol (imagen de la izquierda, abajo) afectará el movimiento de la luna, por lo que se empuja en la pila y permanece allí cuando también se dibuja la luna. Por el contrario, la rotación del planeta sobre su eje (imagen de la derecha, abajo) es local y no afecta a la luna, por lo que se saca de la pila antes de dibujar la luna.
+
+De manera similar, empujaríamos transformaciones en la pila para las rotaciones de la luna (alrededor del planeta y en su eje), como se indica en la siguiente imagen.
+
+
+Aquí está la secuencia de pasos para el "planeta":
+• push () Esta será la parte de la matriz MV del planeta que también afectará a los niños.
+• traducir (...) Para incorporar el movimiento del planeta alrededor del sol en la matriz MV del planeta. En este ejemplo usamos trigonometría para calcular el movimiento del planeta como una traslación.
+• push () Esta será la matriz MV completa del planeta, incluyendo también su eje de rotación.
+• rotate (...) Para incorporar la rotación del eje del planeta (esto luego aparecerá y no afectará a los niños).
+• glm :: value_ptr (mvStack.top ()) Para obtener la matriz MV y luego enviarla al uniforme MV.
+• Dibuja el planeta.
+• pop () Esto quita la matriz del planeta MV de la pila, exponiendo debajo una copia anterior de la matriz del planeta MV que no incluye la rotación del eje del planeta (de modo que solo la traslación del planeta afectará a la luna).
+Ahora podemos escribir la rutina display () completa, mostrada en el Programa 4.4. 

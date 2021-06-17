@@ -1,0 +1,36 @@
+	Gestión de datos gráficos 3D  
+El uso de OpenGL para renderizar imágenes 3D generalmente implica el envío de varios conjuntos de datos a través de la tubería de sombreado de OpenGL. Por ejemplo, para dibujar un objeto 3D simple como un cubo, necesitarás enviar al menos los siguientes elementos
+- los vértices del modelo del cubo
+- algunas matrices de transformación para controlar la apariencia del cubo orientación del cubo en el espacio 3D
+Para complicar un poco las cosas, hay dos formas de enviar datos a través del pipeline de OpenGL
+- a través de un buffer a un atributo de vértice o
+- directamente a una variable uniforme.
+Es importante entender exactamente cómo funcionan estos dos mecanismos, para utilizar el método apropiado para cada elemento que estamos enviando.
+Empecemos por renderizar un simple cubo.
+
+BUFFERS Y ATRIBUTOS DE VÉRTICES
+Para que un objeto sea dibujado, sus vértices deben ser enviados al shader de vértices. 
+Los vértices se suelen enviar poniéndolos en un buffer en la parte de C++ y asociando ese buffer con un atributo de vértice declarado en el shader. Hay varios pasos para lograr esto, algunos de los cuales sólo tienen que hacerse una vez, y algunos de que -si la escena es animada- deben hacerse en cada fotograma:
+Se hace una vez - típicamente en init():
+1. crear un búfer
+2. copiar los vértices en el buffer
+Se hace en cada fotograma -típicamente en display():
+1. habilitar el buffer que contiene los vértices
+2. asociar el buffer con un atributo de vértice
+3. habilitar el atributo de vértice
+4. utilizar glDrawArrays(...) para dibujar el objeto
+Los búferes suelen crearse de una sola vez al inicio del programa, ya sea en init() o en una función llamada por init(). En OpenGL, un buffer está contenido en un Vertex Buffer Object, o VBO, que es declarado e instanciado en la aplicación C++/OpenGL. Una escena puede requerir muchos VBOs, por lo que es habitual generar y luego rellenar varios de ellos en la función init() para que estén disponibles siempre que su programa necesite dibujar uno o más de ellos.
+ 
+Un buffer interactúa con un atributo de vértice de una manera específica. Cuando se ejecuta glDrawArrays(), los datos del buffer comienzan a fluir, secuencialmente desde el principio del buffer, a través del vertex shader. Como se describe en el Capítulo 2, el sombreador de vértices se ejecuta una vez por vértice. Un vértice en el espacio 3D requiere tres valores, por lo que un atributo de vértice apropiado en el shader para recibir estos tres valores sería de tipo vec3. Entonces, por cada tres valores en el buffer, se invoca el shader, como se ilustra en la Figura 4.1.
+Una estructura relacionada en OpenGL se llama Vertex Array Object, o VAO. Los VAO se introdujeron en la versión 3.0 de OpenGL y se proporcionan como una forma de organizar los búferes y hacerlos más fáciles de manipular en escenas complejas. OpenGL requiere que se cree al menos un VAO, y para nuestros propósitos uno será suficiente.
+Por ejemplo, supongamos que queremos mostrar dos objetos. En C++, podríamos hacerlo declarando un único VAO y un conjunto asociado de dos VBOs (uno por objeto), como sigue
+
+
+Los dos comandos de OpenGL glGenVertexArrays() y glGenBuffers() crean VAOs y VBOs respectivamente, y devuelven IDs enteros para ellos. Almacenamos esos IDs en las matrices enteras vao y vbo. Los dos parámetros de cada una de ellas se refieren a cuántos IDs se crean, y a un array para mantener los IDs devueltos. El propósito de glBindVertexArrays() es hacer que el VAO especificado sea "activo" para que los búferes1 generados se asocien a ese VAO.
+Un búfer necesita tener una variable de atributo de vértice correspondiente declarada en el sombreador de vértices. Los atributos de vértice son generalmente las primeras variables declaradas en un shader. En nuestro ejemplo del cubo, un atributo de vértice para recibir los vértices del cubo podría ser declarado en el sombreador de vértices como sigue:
+
+La palabra clave in significa "input" e indica que este atributo de vértice recibirá valores de un buffer (como veremos más adelante, los atributos de vértice también pueden usarse para "output"). Como se ha visto antes, el "vec3" significa que cada invocación del shader tomará tres valores flotantes (presumiblemente x, y, z, que comprenden un solo vértice). El nombre de la variable es "position". La parte "layout (location=0)" del comando se denomina "calificador de layout" y es la forma en que asociaremos el atributo de vértice con un búfer particular. Así, este atributo de vértice tiene un identificador 0 que utilizaremos más adelante para este propósito
+
+A lo largo de este ejemplo se declaran dos búferes, para enfatizar que normalmente utilizaremos varios búferes. Más adelante utilizaremos los búferes adicionales para almacenar otra información asociada al vértice, como el color. En el caso actual, sólo utilizamos uno de los búferes declarados, por lo que habría bastado con declarar un solo buffers. habría bastado con declarar un solo VBO
+
+Traducción realizada con la versión gratuita del traductor www.DeepL.com/Translator

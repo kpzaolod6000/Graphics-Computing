@@ -1,0 +1,30 @@
+RENDER MÚLTIPLES COPIAS
+DE UN OBJETO
+
+Ahora ampliamos lo que hemos aprendido a renderizar múltiples objetos. Antes de abordar el caso general de renderizar una variedad de modelos en una sola escena, consideremos el caso más simple de múltiples ocurrencias del mismo modelo. Supongamos, por ejemplo, que deseamos expandir el ejemplo anterior para que genere un "enjambre" de 24 cubos giratorios. Podemos hacer esto moviendo las porciones del código en display () que construyen la matriz MV y que dibujan el cubo (que se muestra a continuación en azul) en un ciclo que se ejecuta 24 veces. Incorporamos la variable de bucle en la rotación y traslación del cubo para que cada vez que se dibuje el cubo, se construya una matriz de modelo diferente. (También colocamos la cámara más abajo del eje Z positivo para que podamos ver todos los cubos). En la Figura 4.8 se muestra un fotograma de la escena animada resultante.
+
+Instancia
+La instanciación proporciona un mecanismo para decirle a la tarjeta gráfica que procese múltiples copias de un objeto usando una única llamada C ++ / OpenGL. Esto puede resultar en un beneficio de rendimiento significativo, particularmente cuando hay miles o millones de copias del objeto que se está dibujando, como cuando se procesan muchas flores en un campo o muchos zombis en un ejército.
+Comenzamos cambiando la llamada glDrawArrays () en nuestra aplicación C ++ / OpenGL a glDrawArraysInstanced (). Ahora, podemos pedirle a OpenGL que dibuje tantas copias como queramos. Podemos especificar dibujar 24 cubos de la siguiente manera:
+
+glDrawArraysInstanced (GL_TRIANGLES, 0, 36, 24);
+Cuando se utiliza la creación de instancias, el sombreador de vértices tiene acceso a una variable incorporada gl_InstanceID, un número entero que se refiere a qué instancia numérica del objeto se está procesando actualmente.
+Para replicar nuestro ejemplo anterior de cubos giratorios usando instancias, necesitaremos mover los cálculos que construyen las diferentes matrices del modelo (previamente dentro de un bucle en display ()) al sombreador de vértices. Dado que GLSL no proporciona funciones de traducción o rotación, y no podemos realizar llamadas a GLM desde el interior de un sombreador, necesitaremos usar las funciones de utilidad del Programa 3.1. También necesitaremos pasar el "factor de tiempo" de la aplicación C ++ / OpenGL al sombreador de vértices de manera uniforme. También necesitamos pasar el modelo y ver las matrices en uniformes separados porque los cálculos de rotación se aplican a la matriz del modelo de cada cubo. Las revisiones, incluidas las de la aplicación C ++ / OpenGL y las del nuevo sombreador de vértices, se muestran en el Programa 4.2.
+
+ La salida resultante del Programa 4.2 es idéntica a la del anterior
+ejemplo, y se puede ver en la Figura 4.8 anterior.
+Instanciar hace posible expandir en gran medida el número de copias de un
+objeto; en este ejemplo, la animación de 100.000 cubos sigue siendo factible incluso para un modesto
+GPU. Los cambios en el código, principalmente unas pocas constantes modificadas para esparcir la gran cantidad de cubos más lejos, son los siguientes
+
+RENDER MÚLTIPLES DIFERENTES
+MODELOS EN UNA ESCENA
+Para renderizar más de un modelo en una sola escena, un enfoque simple es usar un búfer separado para cada modelo. Cada modelo necesitará su propia matriz de modelo y, por lo tanto, se generará una nueva matriz de vista de modelo para cada modelo que representemos. También será necesario que haya llamadas separadas a glDrawArrays () para cada modelo. Por lo tanto, será necesario realizar cambios tanto en init () como en display ().
+Otra consideración es si necesitaremos o no diferentes sombreadores, o un programa de renderizado diferente, para cada uno de los objetos que deseamos dibujar. Resulta que, en muchos casos, podemos usar los mismos sombreadores (y por lo tanto el mismo programa de renderizado) para los distintos objetos que estamos dibujando. Por lo general, solo necesitamos emplear diferentes programas de renderizado para los diversos objetos si están construidos con diferentes primitivas (como líneas en lugar de triángulos), o si hay una iluminación compleja u otros efectos involucrados. Por ahora, ese no es el caso, por lo que podemos reutilizar los mismos sombreadores de vértices y fragmentos, y simplemente modificar nuestra aplicación C ++ / OpenGL para enviar cada modelo por la tubería cuando se llama a display ().
+Procedamos agregando una pirámide simple, de modo que nuestra escena incluya tanto un solo cubo como una pirámide. Las modificaciones relevantes al código se muestran en el Programa 4.3. Se resaltan algunos de los detalles clave, como dónde especificamos uno u otro búfer, y dónde especificamos el número de vértices contenidos en el modelo. Tenga en cuenta que la pirámide se compone de seis triángulos: cuatro en los lados y dos en la parte inferior, lo que totaliza 6 × 3 = 18 vértices.
+La escena resultante, que contiene tanto el cubo como la pirámide, se muestra en la figura 4.10.
+
+Algunos otros detalles menores a tener en cuenta con respecto al Programa 4.3:
+• Las variables pyrLocX, pyrLocY y pyrLocZ deben declararse y luego inicializarse en init () en la ubicación de la pirámide deseada, como se hizo para la ubicación del cubo.
+• La matriz de vista vMat se crea en la parte superior de display () y luego se usa en las matrices de vista de modelo del cubo y de la pirámide.
+• Los sombreadores de vértices y fragmentos no se muestran; no se han modificado con respecto a la Sección 4.5. 
