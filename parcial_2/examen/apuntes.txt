@@ -1,0 +1,5 @@
+u velocidad
+ρ densidad simbologia es la cantidad de masa en un determinado volumen
+campo de velocidad
+
+dt time step (unidad de tiempo) paso por tiempo la cual el fluido recorre o algo asi gaaa (para el comportamiento solo necetias un pequeño time step)
