@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluid Simulation</title>
+</head>
+<body>
+
+    <script type = 'module'>    
+         import * as THREE from './jsm/three.module.js';
+        import { GUI } from './jsm/dat.gui.module.js';
+        import {OrbitControls} from './jsm/OrbitControls.js'; 
+        import { FluidCube,IX } from './Fluids3D/Navier_Stokes_Equations_2.js';
+        var N = 20;
+        var fluid = new FluidCube(0.2,0,0.001);
+        
+        function getRndInteger(min,max) {
+            return Math.random() * (max - min) + min;
+        }
+        // for (let i_ = -1; i_ <= 1; i_++) {
+        //     for (let j_ = -1; j_ <= 1; j_++) {
+        //         for (let k_ = -1; k_ <= 1; k_++) {
+        //             fluid.FluidCubeAddDensity((N/2)+i_,(N/2)+j_,(N/2)+k_, getRndInteger(50,150));   
+        //         }
+        //     }
+        // }
+
+        // for (let in_ = 0; in_ < 2 ; in_++) {
+        //     var x_ = getRndInteger(-1.0,1.0);
+        //     var y_ = getRndInteger(-1.0,1.0);
+        //     var z_ = getRndInteger(-1.0,1.0);
+        //     fluid.FluidCubeAddVelocity(N/2, N/2,N/2, x_,y_ ,z_);       
+        // }
+        // fluid.FluidCubeStep();
+        // //scene
+        // var scene = new THREE.Scene();
+        
+        // for (let i = 0; i < N; i++) {
+        //     for (let j = 0; j < N; j++) {
+        //         for (let k = 0; k < N; k++) {
+                    
+        //             //color
+        //             var density = fluid.density[IX(i,j,k)];
+                   
+        //             if(density >= 1){
+        //                 //mesh    
+        //                 const color2 = new THREE.Color( 0x808080 ); 
+        //                 console.log(density)
+        //                 color2.addScalar(density);
+        //                 console.log(color2.getHex());
+        //                 //console.log(Math.round(density))
+        //                 //console.log(colorHex)
+        //                 var geometry = new THREE.BoxGeometry(1.0,1.0,1.0); 
+        //                 //var material = new THREE.MeshBasicMaterial( {color:colorHex,transparent:true,opacity:density/2} );
+        //                 //var material = new THREE.MeshBasicMaterial( {color:0x404040} );
+        //                 var material = new THREE.MeshBasicMaterial( {color:color2.getHex()} );
+        //                 var cube = new THREE.Mesh( geometry, material );
+
+        //                 cube.position.x = i
+        //                 cube.position.y = j
+        //                 cube.position.z = k
+        //                 scene.add(cube);  
+        //             }
+                    
+        //         }
+                
+        //     }
+            
+        // }
+  
+        //scene.background = new THREE.Color(0x008800);
+       
+        //camera
+        var camera = new THREE.PerspectiveCamera(
+            75, // angulo
+            window.innerWidth/window.innerHeight, // aspect, es lo que ve la camara
+            0.1, // near
+            2000 // far
+        );        
+        camera.position.z = 50;
+        
+        //scene
+        var scene = new THREE.Scene();
+        
+        //render
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        document.body.appendChild( renderer.domElement );
+
+        const axesHelper = new THREE.AxesHelper( 15 );
+        scene.add( axesHelper );
+
+        //renderer.render( scene, camera );
+        renderer.render( scene, camera );
+
+        // para los controles del mouse
+        var controls = new OrbitControls( camera, renderer.domElement );
+        controls.minDistance = 3; // minima distancia a q puede hacer zoom
+        controls.maxDistance = 100; // maxima distancia a q puede hacer zoom
+       
+        // para que el renderer se actualize al redimensionar el navegador
+        window.addEventListener('resize', redimensionar);
+        function redimensionar(){
+            // actualizamos las vcariables que dependen del tamanio delñ navegador
+            camera.aspect = window.innerWidth/window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize( window.innerWidth, window.innerHeight );
+            renderer.render( scene, camera );
+        }
+
+        var animate = function(){
+            requestAnimationFrame(animate);            
+
+            for (let i_ = -1; i_ <= 1; i_++) {
+                for (let j_ = -1; j_ <= 1; j_++) {
+                    for (let k_ = -1; k_ <= 1; k_++) {
+                        fluid.FluidCubeAddDensity((N/2)+i_,(N/2)+j_,(N/2)+k_, getRndInteger(50,150));   
+                    }
+                }
+            }
+
+            for (let in_ = 0; in_ < 2 ; in_++) {
+                var x_ = getRndInteger(-1.0,1.0);
+                var y_ = getRndInteger(-1.0,1.0);
+                var z_ = getRndInteger(-1.0,1.0);
+                fluid.FluidCubeAddVelocity(N/2, N/2,N/2, x_,y_ ,z_);       
+            }
+            fluid.FluidCubeStep();
+
+            for (let i = 0; i < N; i++) {
+                for (let j = 0; j < N; j++) {
+                    for (let k = 0; k < N; k++) {
+                        
+                        //color
+                        var density = fluid.density[IX(i,j,k)];
+                        
+                        if(density >= 1){
+                            //mesh    
+                            const color2 = new THREE.Color( 0x808080 ); 
+                            //console.log(density)
+                            color2.addScalar(density);
+                            //console.log(color2.getHex());
+                            //console.log(Math.round(density))
+                            //console.log(colorHex)
+                            var geometry = new THREE.BoxGeometry(1.0,1.0,1.0); 
+                            //var material = new THREE.MeshBasicMaterial( {color:colorHex,transparent:true,opacity:density/2} );
+                            //var material = new THREE.MeshBasicMaterial( {color:0x404040} );
+                            var material = new THREE.MeshBasicMaterial( {color:color2.getHex()} );
+                            var cube = new THREE.Mesh( geometry, material );
+
+                            cube.position.x = i
+                            cube.position.y = j
+                            cube.position.z = k
+                            scene.add(cube);  
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            renderer.render( scene, camera );
+        }
+
+        animate();
+    </script>  
+
+</body>
+</html>
