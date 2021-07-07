@@ -83,16 +83,16 @@ function lin_solve(b, x, x0, a, c) {
     let cRecip = 1.0 / c;
     for (let t = 0; t < iter; t++) {
         for (let j = 1; j < N - 1; j++) {
-        for (let i = 1; i < N - 1; i++) {
-            x[IX(i, j)] =
-            (x0[IX(i, j)] +
-                a *
-                (x[IX(i + 1, j)] +
-                    x[IX(i - 1, j)] +
-                    x[IX(i, j + 1)] +
-                    x[IX(i, j - 1)])) *
-            cRecip;
-        }
+            for (let i = 1; i < N - 1; i++) {
+                x[IX(i, j)] =
+                (x0[IX(i, j)] +
+                    a *
+                    (x[IX(i + 1, j)] +
+                        x[IX(i - 1, j)] +
+                        x[IX(i, j + 1)] +
+                        x[IX(i, j - 1)])) *
+                cRecip;
+            }
         }
         set_bnd(b, x);
     }

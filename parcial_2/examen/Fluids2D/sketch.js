@@ -7,7 +7,7 @@ function setup() {
 }
 
 function draw() {
-    stroke(51);
+    stroke(51);//color de cuadraos en celdas
     strokeWeight(2);
 
     let cx = int((0.5 * width) / SCALE);

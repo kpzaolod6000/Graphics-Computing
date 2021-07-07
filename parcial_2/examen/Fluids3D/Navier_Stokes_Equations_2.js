@@ -1,6 +1,5 @@
 let N = 20;
-let iter = 16;
-let t = 0;
+let iter = 20;
 
 function IX(x, y, z) {
     return x + y * N + z * N * N;
@@ -40,6 +39,9 @@ class FluidCube {
         let s       = this.s;
         let density = this.density;
         
+        //Sistema no lineal
+        
+        //la velocidad respecto al tiempo
         diffuse(1, Vx0, Vx, visc, dt);
         diffuse(2, Vy0, Vy, visc, dt);
         diffuse(3, Vz0, Vz, visc, dt);
@@ -52,6 +54,8 @@ class FluidCube {
         
         project(Vx, Vy, Vz, Vx0, Vy0);
         
+        //Sistema lineal
+        //la densidad respecto al tiempo
         diffuse(0, s, density, diff, dt);
         advect(0, density, s, Vx, Vy, Vz, dt);
     }
@@ -142,10 +146,10 @@ function lin_solve(b,x,x0,a,c)
 }
 
 //diffuse
-function diffuse (b, x,x0,diff,dt)
+function diffuse (b, x,x0,diff,dt) // x,x0 son arrays
 {
     let a = dt * diff * (N - 2) * (N - 2);
-    lin_solve(b, x, x0, a, 1 + 6 * a, iter, N);
+    lin_solve(b, x, x0, a, 1 + 6 * a);//eliminar iter,N
 }
 
 //project

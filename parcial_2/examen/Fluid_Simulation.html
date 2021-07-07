@@ -13,9 +13,11 @@
         import { GUI } from './jsm/dat.gui.module.js';
         import {OrbitControls} from './jsm/OrbitControls.js'; 
         import { FluidCube,IX } from './Fluids3D/Navier_Stokes_Equations_2.js';
+        import {OBJLoader} from './jsm/OBJLoader.js';
+        import {STLLoader} from './jsm/STLLoader.js';
+        import {MTLLoader} from './jsm/MTLLoader.js';
         var N = 20;
-        var fluid = new FluidCube(0.2,0,0.001);
-        
+        var fluid = new FluidCube(0,0.0000001,0.2);//diffusion,viscosity,dt       
         function getRndInteger(min,max) {
             return Math.random() * (max - min) + min;
         }
@@ -70,8 +72,7 @@
             
         // }
   
-        //scene.background = new THREE.Color(0x008800);
-       
+   
         //camera
         var camera = new THREE.PerspectiveCamera(
             75, // angulo
@@ -83,6 +84,7 @@
         
         //scene
         var scene = new THREE.Scene();
+        scene.background =  new THREE.TextureLoader().load('BGnew.jpg' );
         
         //render
         var renderer = new THREE.WebGLRenderer();
@@ -109,6 +111,14 @@
             renderer.setSize( window.innerWidth, window.innerHeight );
             renderer.render( scene, camera );
         }
+        
+        const geometry = new THREE.BoxGeometry( 20, 20, 20 );
+        const edges = new THREE.EdgesGeometry( geometry );
+        const line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0xE7B40A } ) );
+        line.position.x = 10;
+        line.position.y = 10;
+        line.position.z = 10;
+        scene.add( line );
 
         var animate = function(){
             requestAnimationFrame(animate);            
@@ -136,7 +146,7 @@
                         //color
                         var density = fluid.density[IX(i,j,k)];
                         
-                        if(density >= 1){
+                        if(density >= 1 && density <= 100){
                             //mesh    
                             const color2 = new THREE.Color( 0x808080 ); 
                             //console.log(density)
@@ -145,9 +155,9 @@
                             //console.log(Math.round(density))
                             //console.log(colorHex)
                             var geometry = new THREE.BoxGeometry(1.0,1.0,1.0); 
-                            //var material = new THREE.MeshBasicMaterial( {color:colorHex,transparent:true,opacity:density/2} );
+                            var material = new THREE.MeshBasicMaterial( {color:0x808080,transparent:true,opacity:color2.getHex()} );
                             //var material = new THREE.MeshBasicMaterial( {color:0x404040} );
-                            var material = new THREE.MeshBasicMaterial( {color:color2.getHex()} );
+                            // var material = new THREE.MeshBasicMaterial( {color:color2.getHex()} );
                             var cube = new THREE.Mesh( geometry, material );
 
                             cube.position.x = i
