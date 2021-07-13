@@ -12,7 +12,12 @@ def PixelOperations(img,c,d):
     b = 255
     for row in range(len(img)):
         for pixel in range(len(img[row])):
-            img[row][pixel] = EquationContrastStretching(img[row][pixel],a,b,c,d)
+            if(0<=img[row][pixel]  and img[row][pixel]  <= c):
+                img[row][pixel] = (a/c)*img[row][pixel]
+            elif(c<img[row][pixel] and img[row][pixel] <= d):
+                img[row][pixel] = ((img[row][pixel] - c) * ((b-a)/(d-c)))+a
+            else:
+                 img[row][pixel] = ((img[row][pixel] - d) * ((255-b)/(255-d)))+b
     img = np.array(img, dtype=np.uint8)
     return img
 
@@ -36,12 +41,9 @@ cv2.imshow('Imagen real',img)
 arrayImg = img.ravel()
 sortArray = np.sort(arrayImg)
 print(sortArray)
-# 5% y el 95 %
-# min_ = 0
-# max_ = int(len(sortArray) - 1)
-
-min_ = int(len(sortArray) * 0.0015)
-max_ = int(len(sortArray) * 0.9995)
+# 10% y el 90 %
+min_ = int(len(sortArray) * 0.1)
+max_ = int(len(sortArray) * 0.9)
 c = sortArray[min_]
 d = sortArray[max_]
 print(len(sortArray))
