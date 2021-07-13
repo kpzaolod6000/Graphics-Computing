@@ -3,10 +3,6 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 
-def EquationContrastStretching(pixel,a,b,c,d):
-    g = ((pixel - c) * ((b-a)/(d-c)))+a
-    return g
-
 def PixelOperations(img,c,d):
     a = 0
     b = 255
