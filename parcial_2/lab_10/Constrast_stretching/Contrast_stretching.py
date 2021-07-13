@@ -16,7 +16,7 @@ def PixelOperations(img,c,d):
     img = np.array(img, dtype=np.uint8)
     return img
 
-imgReal = cv2.imread("../imagen5.JPG", cv2.IMREAD_GRAYSCALE) #8 bit por escala de grises
+imgReal = cv2.imread("dama.JPG", cv2.IMREAD_GRAYSCALE) #8 bit por escala de grises
 imgReal = cv2.resize(imgReal,(600,600))
 img = imgReal
 
