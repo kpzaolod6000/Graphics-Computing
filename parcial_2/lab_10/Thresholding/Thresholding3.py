@@ -7,10 +7,11 @@ def getThresholding(img):
     print(img)
     for i in range(len(img)):
         for j in range(len(img[i])):
-            if(img[i][j] >= 180 and img[i][j] <= 210):#185 
-                modifiedImg[i][j] = np.uint8(0)
-            else:
+            # if(img[i][j] >= 180 and img[i][j] <= 210):#185
+            if(img[i][j] >= 185 and img[i][j] <= 210):#185 
                 modifiedImg[i][j] = np.uint8(255)
+            else:
+                modifiedImg[i][j] = np.uint8(0)
     return modifiedImg
 
 # read an image
