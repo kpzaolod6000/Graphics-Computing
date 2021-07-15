@@ -62,7 +62,7 @@ for i in range(len(img)):
         img[i][j] = np.uint8( Sn[img[i][j]] )#a la posicion del color agrega un nuevo color modificado
 
 ax2.hist(img.ravel(),256,[0,256])
-ax2.set_title('Imagen (Contrast Stretching)')
+ax2.set_title('Imagen (Histogram Equalization)')
 ax2.set_xlabel('Intensidad')
 ax2.set_ylabel('Cantidad de pixeles')
 cv2.imshow('Imagen (Histogram Equalization)',img)
