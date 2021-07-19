@@ -41,7 +41,12 @@ def HistogramEqualization(histogramData,row,column):
 imgReal = cv2.imread(sys.argv[1], cv2.IMREAD_GRAYSCALE) #8 bit por escala de grises
 # imgReal = cv2.resize(imgReal,(600,600))
 img = imgReal
-print(img.shape)
+
+#Recortar una imagen
+# imageOut = img[60:220,280:480]
+# cv2.imshow('Imagen recortado',imageOut)
+
+# print(img.shape)
 
 #HISTOGRAMA
 f, (ax1, ax2) = plt.subplots(1, 2, sharey=True,figsize=(15, 5))
@@ -53,10 +58,11 @@ cv2.imshow('Imagen Original',img)
 
 histogramData = hist_mask[0]
 
+
 # print(test_())
 # print(histogramData)
 Sn = HistogramEqualization(histogramData,img.shape[0],img.shape[1])
-print(Sn)
+# print(Sn)
 for i in range(len(img)):
     for j in range(len(img[i])):
         img[i][j] = np.uint8( Sn[img[i][j]] )#a la posicion del color agrega un nuevo color modificado
@@ -66,6 +72,11 @@ ax2.set_title('Imagen (Histogram Equalization)')
 ax2.set_xlabel('Intensidad')
 ax2.set_ylabel('Cantidad de pixeles')
 cv2.imshow('Imagen (Histogram Equalization)',img)
+# # Filename
+# plt.savefig('Histograma3.png')
+# # Filename
+# filename = 'HistEquaCapilla.jpg'
+# cv2.imwrite(filename, img)
 
            
 # for intensity in histogramData:

@@ -28,10 +28,10 @@ for i in range(len(img)):
 # print(type(am))
 
 ax2.hist(img.ravel(),256,[0,256])
-ax2.set_title('Imagen (Logarithm Operator)')
+ax2.set_title('Imagen (Raise to the power Operator)')
 ax2.set_xlabel('Intensidad')
 ax2.set_ylabel('Cantidad de pixeles')
-cv2.imshow('Imagen (Logarithm Operator)',img)
+cv2.imshow('Imagen (Raise to the power Operator)',img)
 
 
 plt.show()

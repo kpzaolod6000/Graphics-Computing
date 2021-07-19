@@ -16,11 +16,12 @@ ax1.set_ylabel('Cantidad de pixeles')
 cv2.imshow('Imagen Original',img)
 
 #constant c
-c = 20
-b = 1.01
+c = 100
 for i in range(len(img)):
     for j in range(len(img[0])):
-        new_pixel = c * ((b**int(img[i][j])) - 1)
+        new_pixel = c * math.log10(1 + int(img[i][j]))
+        if (new_pixel > 255):
+            new_pixel = 255
         img[i][j] = np.uint8(new_pixel)
 
 # am = int(img[0][0])
@@ -33,6 +34,10 @@ ax2.set_xlabel('Intensidad')
 ax2.set_ylabel('Cantidad de pixeles')
 cv2.imshow('Imagen (Logarithm Operator)',img)
 
+# plt.savefig('HistogramaLogaritm3_120.png')
+# # Filename
+# filename = 'logaritmRostroClaro120.jpg'
+# cv2.imwrite(filename, img)
 
 plt.show()
 cv2.waitKey(0)
