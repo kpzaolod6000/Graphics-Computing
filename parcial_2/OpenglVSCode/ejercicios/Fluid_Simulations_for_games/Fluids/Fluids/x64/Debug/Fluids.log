@@ -1,0 +1,24 @@
+﻿  main.cpp
+D:\Programas\visual_studio\ejercicios\Fluid_Simulations_for_games\Fluids\Fluids\Solver_Navier_Stokes.h(50,30): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulations_for_games\Fluids\Fluids\Solver_Navier_Stokes.h(51,34): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulations_for_games\Fluids\Fluids\Solver_Navier_Stokes.h(52,34): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulations_for_games\Fluids\Fluids\Solver_Navier_Stokes.h(53,38): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulations_for_games\Fluids\Fluids\Solver_Navier_Stokes.h(57,30): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulations_for_games\Fluids\Fluids\Solver_Navier_Stokes.h(58,34): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulations_for_games\Fluids\Fluids\Solver_Navier_Stokes.h(59,34): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulations_for_games\Fluids\Fluids\Solver_Navier_Stokes.h(60,38): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulations_for_games\Fluids\Fluids\Solver_Navier_Stokes.h(64,30): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulations_for_games\Fluids\Fluids\Solver_Navier_Stokes.h(65,34): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulations_for_games\Fluids\Fluids\Solver_Navier_Stokes.h(66,34): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulations_for_games\Fluids\Fluids\Solver_Navier_Stokes.h(67,38): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulations_for_games\Fluids\Fluids\Solver_Navier_Stokes.h(71,29): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulations_for_games\Fluids\Fluids\Solver_Navier_Stokes.h(72,33): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulations_for_games\Fluids\Fluids\Solver_Navier_Stokes.h(74,33): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulations_for_games\Fluids\Fluids\Solver_Navier_Stokes.h(75,37): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulations_for_games\Fluids\Fluids\Solver_Navier_Stokes.h(77,33): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulations_for_games\Fluids\Fluids\Solver_Navier_Stokes.h(78,37): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulations_for_games\Fluids\Fluids\Solver_Navier_Stokes.h(80,37): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulations_for_games\Fluids\Fluids\Solver_Navier_Stokes.h(81,41): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulations_for_games\Fluids\Fluids\Solver_Navier_Stokes.h(141,35): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulations_for_games\Fluids\Fluids\main.cpp(33,33): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+  Fluids.vcxproj -> D:\Programas\visual_studio\ejercicios\Fluid_Simulations_for_games\Fluids\x64\Debug\Fluids.exe

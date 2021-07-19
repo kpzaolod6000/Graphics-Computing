@@ -1,0 +1,36 @@
+# CMake generation dependency list for this directory.
+D:/Programas/CMake/cmake-3.20.3-windows-x86_64/share/cmake-3.20/Modules/BasicConfigVersion-SameMajorVersion.cmake.in
+D:/Programas/CMake/cmake-3.20.3-windows-x86_64/share/cmake-3.20/Modules/CMakeCInformation.cmake
+D:/Programas/CMake/cmake-3.20.3-windows-x86_64/share/cmake-3.20/Modules/CMakeCommonLanguageInclude.cmake
+D:/Programas/CMake/cmake-3.20.3-windows-x86_64/share/cmake-3.20/Modules/CMakeDependentOption.cmake
+D:/Programas/CMake/cmake-3.20.3-windows-x86_64/share/cmake-3.20/Modules/CMakeGenericSystem.cmake
+D:/Programas/CMake/cmake-3.20.3-windows-x86_64/share/cmake-3.20/Modules/CMakeInitializeConfigs.cmake
+D:/Programas/CMake/cmake-3.20.3-windows-x86_64/share/cmake-3.20/Modules/CMakeLanguageInformation.cmake
+D:/Programas/CMake/cmake-3.20.3-windows-x86_64/share/cmake-3.20/Modules/CMakePackageConfigHelpers.cmake
+D:/Programas/CMake/cmake-3.20.3-windows-x86_64/share/cmake-3.20/Modules/CMakeRCInformation.cmake
+D:/Programas/CMake/cmake-3.20.3-windows-x86_64/share/cmake-3.20/Modules/CMakeSystemSpecificInformation.cmake
+D:/Programas/CMake/cmake-3.20.3-windows-x86_64/share/cmake-3.20/Modules/CMakeSystemSpecificInitialize.cmake
+D:/Programas/CMake/cmake-3.20.3-windows-x86_64/share/cmake-3.20/Modules/CheckCSourceCompiles.cmake
+D:/Programas/CMake/cmake-3.20.3-windows-x86_64/share/cmake-3.20/Modules/CheckIncludeFile.cmake
+D:/Programas/CMake/cmake-3.20.3-windows-x86_64/share/cmake-3.20/Modules/CheckLibraryExists.cmake
+D:/Programas/CMake/cmake-3.20.3-windows-x86_64/share/cmake-3.20/Modules/Compiler/CMakeCommonCompilerMacros.cmake
+D:/Programas/CMake/cmake-3.20.3-windows-x86_64/share/cmake-3.20/Modules/Compiler/MSVC-C.cmake
+D:/Programas/CMake/cmake-3.20.3-windows-x86_64/share/cmake-3.20/Modules/FindDoxygen.cmake
+D:/Programas/CMake/cmake-3.20.3-windows-x86_64/share/cmake-3.20/Modules/FindPackageHandleStandardArgs.cmake
+D:/Programas/CMake/cmake-3.20.3-windows-x86_64/share/cmake-3.20/Modules/FindPackageMessage.cmake
+D:/Programas/CMake/cmake-3.20.3-windows-x86_64/share/cmake-3.20/Modules/FindThreads.cmake
+D:/Programas/CMake/cmake-3.20.3-windows-x86_64/share/cmake-3.20/Modules/GNUInstallDirs.cmake
+D:/Programas/CMake/cmake-3.20.3-windows-x86_64/share/cmake-3.20/Modules/Internal/CheckSourceCompiles.cmake
+D:/Programas/CMake/cmake-3.20.3-windows-x86_64/share/cmake-3.20/Modules/Platform/Windows-MSVC-C.cmake
+D:/Programas/CMake/cmake-3.20.3-windows-x86_64/share/cmake-3.20/Modules/Platform/Windows-MSVC.cmake
+D:/Programas/CMake/cmake-3.20.3-windows-x86_64/share/cmake-3.20/Modules/Platform/Windows.cmake
+D:/Programas/CMake/cmake-3.20.3-windows-x86_64/share/cmake-3.20/Modules/Platform/WindowsPaths.cmake
+D:/Programas/CMake/cmake-3.20.3-windows-x86_64/share/cmake-3.20/Modules/WriteBasicConfigVersionFile.cmake
+D:/Programas/visual studio/glfw-3.3.4/CMakeLists.txt
+D:/Programas/visual studio/glfw-3.3.4/build/CMakeFiles/3.20.3/CMakeCCompiler.cmake
+D:/Programas/visual studio/glfw-3.3.4/build/CMakeFiles/3.20.3/CMakeRCCompiler.cmake
+D:/Programas/visual studio/glfw-3.3.4/build/CMakeFiles/3.20.3/CMakeSystem.cmake
+D:/Programas/visual studio/glfw-3.3.4/cmake_uninstall.cmake.in
+D:/Programas/visual studio/glfw-3.3.4/src/glfw3.pc.in
+D:/Programas/visual studio/glfw-3.3.4/src/glfw3Config.cmake.in
+D:/Programas/visual studio/glfw-3.3.4/src/glfw_config.h.in

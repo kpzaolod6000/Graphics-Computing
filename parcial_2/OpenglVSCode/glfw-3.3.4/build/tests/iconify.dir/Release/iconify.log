@@ -1,0 +1,6 @@
+﻿  Building Custom Rule D:/Programas/visual studio/glfw-3.3.4/tests/CMakeLists.txt
+  iconify.c
+  getopt.c
+  glad_gl.c
+  Generando código...
+  iconify.vcxproj -> D:\Programas\visual studio\glfw-3.3.4\build\tests\Release\iconify.exe

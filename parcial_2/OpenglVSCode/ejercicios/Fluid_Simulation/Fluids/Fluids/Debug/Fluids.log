@@ -1,0 +1,24 @@
+﻿  main.cpp
+D:\Programas\visual_studio\ejercicios\Fluid_Simulation\Fluids\Fluids\main.cpp(50,30): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulation\Fluids\Fluids\main.cpp(51,34): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulation\Fluids\Fluids\main.cpp(52,34): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulation\Fluids\Fluids\main.cpp(53,38): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulation\Fluids\Fluids\main.cpp(57,30): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulation\Fluids\Fluids\main.cpp(58,34): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulation\Fluids\Fluids\main.cpp(59,34): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulation\Fluids\Fluids\main.cpp(60,38): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulation\Fluids\Fluids\main.cpp(64,30): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulation\Fluids\Fluids\main.cpp(65,34): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulation\Fluids\Fluids\main.cpp(66,34): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulation\Fluids\Fluids\main.cpp(67,38): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulation\Fluids\Fluids\main.cpp(71,29): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulation\Fluids\Fluids\main.cpp(72,33): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulation\Fluids\Fluids\main.cpp(74,33): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulation\Fluids\Fluids\main.cpp(75,37): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulation\Fluids\Fluids\main.cpp(77,33): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulation\Fluids\Fluids\main.cpp(78,37): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulation\Fluids\Fluids\main.cpp(80,37): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulation\Fluids\Fluids\main.cpp(81,41): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulation\Fluids\Fluids\main.cpp(141,35): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Programas\visual_studio\ejercicios\Fluid_Simulation\Fluids\Fluids\main.cpp(196,33): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+  Fluids.vcxproj -> D:\Programas\visual_studio\ejercicios\Fluid_Simulation\Fluids\Debug\Fluids.exe

@@ -1,0 +1,5 @@
+﻿  Building Custom Rule D:/Programas/visual studio/glfw-3.3.4/tests/CMakeLists.txt
+  opacity.c
+  glad_gl.c
+  Generando código...
+  opacity.vcxproj -> D:\Programas\visual studio\glfw-3.3.4\build\tests\Release\opacity.exe
