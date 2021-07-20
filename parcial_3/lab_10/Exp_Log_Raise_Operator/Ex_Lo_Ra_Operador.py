@@ -30,7 +30,7 @@ ax2.set_title('Imagen (Exponential Operator)')
 ax2.set_ylabel('Cantidad de pixeles')
 cv2.imshow('Imagen (Exponential Operator)',img)
 
-# filename = 'ExponentialSuelo.jpg'
+# filename = 'ExponentialPeaje.jpg'
 # cv2.imwrite(filename, img)
 
 #RAISE TO THE POWER OPERATOR
@@ -50,11 +50,9 @@ ax3.set_ylabel('Cantidad de pixeles')
 cv2.imshow('Imagen (Raise to the power Operator)',img2)
 
 
-
-# plt.savefig('HistogramaExponentialRaise1.png')
-# # Filename
-# filename = 'RaiseSuelo.jpg'
+# filename = 'RaisePeaje.jpg'
 # cv2.imwrite(filename, img2)
+
 
 #LOGARITMICO OPERATOR
 #constant c
@@ -74,6 +72,10 @@ ax4.set_title('Imagen (Logarithm Operator)')
 ax4.set_ylabel('Cantidad de pixeles')
 cv2.imshow('Imagen (Logarithm Operator)',img3)
 
+
+# filename = 'LogaritmicPeaje.jpg'
+# cv2.imwrite(filename, img3)
+# plt.savefig('Histogramathreee.png')
 
 plt.show()
 cv2.waitKey(0)
