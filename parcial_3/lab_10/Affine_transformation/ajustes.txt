@@ -1,0 +1,32 @@
+import cv2
+import numpy as np
+
+# Read the image
+img = cv2.imread('dog.jpg',1)
+img = cv2.resize(img,(600,600))
+rows, cols = img.shape[:2]
+cv2.imshow('Imagen Original', img)
+
+# # # Define the 3 pairs of corresponding points 
+# input_pts = np.float32([[0,0], [cols-1,0], [0,rows-1]])
+# output_pts = np.float32([[cols-1,0], [0,0], [cols-1,rows-1]])
+M = np.float32([[1,0], [1,0], [0,1]])
+# print(input_pts)
+# print(len(input_pts))
+# print(output_pts)
+# # Calculate the transformation matrix using cv2.getAffineTransform()
+# M= cv2.getAffineTransform(input_pts , output_pts)
+print(M)
+ 
+# # Apply the affine transformation using cv2.warpAffine()
+# dst = cv2.warpAffine(img, M, (cols,rows))
+ 
+# # Display the image
+# out = cv2.hconcat([img, dst])
+# cv2.imshow('Output', out)
+
+# # filename = 'Resultado_Image1_2.jpg'
+# # cv2.imwrite(filename, imgResult)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()

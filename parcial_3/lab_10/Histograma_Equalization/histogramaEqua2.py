@@ -12,10 +12,10 @@ img = imgReal.copy()
 #Recortar una imagen
 imageOut = img[200:340,160:215]
 # print(imageOut)
-cv2.imshow('Imagen recortado',imgReal)
+cv2.imshow('Imagen Real',imgReal)
 histimg = cv2.resize(imageOut,(150,300))
-filename = 'CapillaRecortada.jpg'
-cv2.imwrite(filename, histimg)
+# filename = 'CapillaRecortada.jpg'
+# cv2.imwrite(filename, histimg)
 
 #HISTOGRAMA
 f, (ax1, ax2) = plt.subplots(1, 2,figsize=(15, 5))
@@ -23,7 +23,7 @@ ax1.hist(imageOut.ravel(),256,[0,256])
 ax1.set_title('Imagen Original')
 ax1.set_xlabel('Intensidad')
 ax1.set_ylabel('Cantidad de pixeles')
-cv2.imshow('Imagen Original',histimg)
+cv2.imshow('Imagen Recortada',histimg)
 
 #HISTOGRAM EQUALIZATION
 
@@ -51,10 +51,10 @@ ax2.set_xlabel('Intensidad')
 ax2.set_ylabel('Cantidad de pixeles')
 cv2.imshow('Imagen (Histogram Equalization)',img_update)
 # # Filename
-plt.savefig('HistogramaRecortada.png')
+# plt.savefig('HistogramaRecortada.png')
 # Filename
-filename = 'HistEquaRecortada.jpg'
-cv2.imwrite(filename, img_update)
+# filename = 'HistEquaRecortada.jpg'
+# cv2.imwrite(filename, img_update)
 
            
 # for intensity in histogramData:
