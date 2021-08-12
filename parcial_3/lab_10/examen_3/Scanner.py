@@ -161,13 +161,18 @@ cv2.imshow("Imagen Original 2", img2)
 imgThresold = Ts.getThresholding(img1,210)#210
 cv2.imshow("Imagen Thresolding", imgThresold )
 
+f, (ax1) = plt.subplots(1, 1, sharey=True,figsize=(15, 5))
+ax1.hist(imgThresold.ravel(),256,[0,256])
+ax1.set_title("Histograma")
+ax1.set_xlabel('Intensidad')
+ax1.set_ylabel('Cantidad de pixeles')
 #===============================================================================================
 # Aplicando Histogram Equalization
 #===============================================================================================
 #Recortar una imagen
 imageOut = img1[450:550,300:450]
 imgEqualized = He.getHistogramEqua(img1,imageOut)
-cv2.imshow("Imagen Equalizada", imgEqualized)
+# cv2.imshow("Imagen Equalizada", imgEqualized)
 
 # cv2.imshow("Imagen recortada", imageOut)
 
@@ -175,7 +180,7 @@ cv2.imshow("Imagen Equalizada", imgEqualized)
 # Aplicando Exponential Operator 
 #===============================================================================================
 imgExpn = Oe.ExponentialOperator(img1)
-cv2.imshow("Operador Exponencial", imgExpn)
+# cv2.imshow("Operador Exponencial", imgExpn)
 
 
 #===============================================================================================
@@ -183,14 +188,14 @@ cv2.imshow("Operador Exponencial", imgExpn)
 #aca se aplico de exponential a logaritmico 
 #===============================================================================================
 imgLog = Ol.LogarithmOperator(imgExpn)
-cv2.imshow("Operador Logarithm", imgLog)
+# cv2.imshow("Operador Logarithm", imgLog)
 
 #===============================================================================================
 # Aplicando Raise to the power Operator
 #
 #===============================================================================================
 imgRpower = ORp.raise_to_the_power_Operator(img1)
-cv2.imshow("Operador Raise to the Power", imgRpower)
+# cv2.imshow("Operador Raise to the Power", imgRpower)
 
 #===============================================================================================
 # Aplicando Constrast Stretching
@@ -205,19 +210,19 @@ c = sortArray[min_]
 d = sortArray[max_]
 imgConstrast = Cs.EquationContrastStretching(img1.astype(int),int(c),int(d))
 
-cv2.imshow("Constrast Stretching", imgConstrast)
+# cv2.imshow("Constrast Stretching", imgConstrast)
 
 
 #===============================================================================================
 # Aplicando Sustraccion de imagenes
 #===============================================================================================
 imgResultSust = Subt.ImagesSubtraction(img1,img2)
-cv2.imshow("Resultado Sustraccion", imgResultSust)
+# cv2.imshow("Resultado Sustraccion", imgResultSust)
 
 
 threshold = 90
 imgResultSust = Ts.getThresholding(imgResultSust,threshold)
-cv2.imshow("Sustraccion Thresolding", imgResultSust)
+# cv2.imshow("Sustraccion Thresolding", imgResultSust)
 
 #===============================================================================================
 # Aplicando Division de imagenes
@@ -235,17 +240,13 @@ c = sortArray[min_]
 d = sortArray[max_]
 imgConstrast = Cs.EquationContrastStretching(imgResultDiv.astype(int),int(c),int(d))
 
-cv2.imshow("Division Constrast Stretching", imgConstrast)
+# cv2.imshow("Division Constrast Stretching", imgConstrast)
 
 threshold = 164
 imgResultDiv = Ts.getThresholding(imgConstrast,threshold)
-cv2.imshow("Division Thresolding", imgResultDiv)
+# cv2.imshow("Division Thresolding", imgResultDiv)
 
-f, (ax1) = plt.subplots(1, 1, sharey=True,figsize=(15, 5))
-ax1.hist(imgConstrast.ravel(),256,[0,256])
-ax1.set_title("Histograma")
-ax1.set_xlabel('Intensidad')
-ax1.set_ylabel('Cantidad de pixeles')
+
 
 # im1_s = cv2.resize(im1, dsize=(0, 0), fx=0.5, fy=0.5)
 # im_tile = concat_tile([[, ,,]])
