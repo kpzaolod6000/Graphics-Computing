@@ -107,11 +107,15 @@ def hconcat_resize_min(im_list, interpolation=cv2.INTER_CUBIC):
 def concat_tile(im_list_2d):
     return cv2.vconcat([cv2.hconcat(im_list_h) for im_list_h in im_list_2d])
 
+ 
+url = "rtsp://admin:admin@192.168.1.8:8554/live"
 
-global ImgResult
-
+print('start')
+cap = cv2.VideoCapture(url)
 while True:
-    success, img = cap.read()
+    ret, img = cap.read()
+	
+    # success, img = cap.read()
     img = cv2.resize(img,(widthImg,heightImg))
     imgEdge = MorphologyOperator(img)
 
@@ -135,9 +139,9 @@ while True:
         ImgResult = imgPersp
         break
     elif key == ord('z'):
-        cv2.imwrite("front.jpg", imgPersp)
+        cv2.imwrite("frontF.jpg", imgPersp)
     elif key == ord('x'):
-        cv2.imwrite("back.jpg", imgPersp)
+        cv2.imwrite("backF.jpg", imgPersp)
 
 #===============================================================================================
 # Lectura del imagenes escaneadas
