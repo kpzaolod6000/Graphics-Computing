@@ -20,14 +20,15 @@ contours=sorted(contours,key=cv2.contourArea,reverse=True)
 
 #the loop extracts the boundary contours of the page
 for c in contours:
-    p=cv2.arcLength(c,True)
-    approx=cv2.approxPolyDP(c,0.02*p,True)
+    p=cv2.arcLength(c,True)#longitud de cada contorno
+    approx=cv2.approxPolyDP(c,0.02*p,True)#retorna los puntos de los puntos de esquina
 
     if len(approx)==4:
         target=approx
         break
+# print(target)
 approx=mapper.mapp(target) #find endpoints of the sheet
-
+# print(approx)
 pts=np.float32([[0,0],[800,0],[800,800],[0,800]])  #map to 800*800 target window
 
 op=cv2.getPerspectiveTransform(approx,pts)  #get the top or bird eye view effect

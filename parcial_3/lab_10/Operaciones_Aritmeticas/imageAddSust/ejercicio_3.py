@@ -5,7 +5,7 @@ from matplotlib import pyplot as plt
 
 def getThresholding(img,threshold):
     modifiedImg = img.copy()
-    print(img)
+    # print(img)
     for i in range(len(img)):
         for j in range(len(img[i])):
             if(img[i][j] < threshold): 
@@ -29,7 +29,7 @@ img1 = img1.astype(int)
 img2 = img2.astype(int)
 imgResult = img1.copy()
 # print(imgResult.dtype)
-print(imgResult)
+# print(imgResult)
 # imgResult = list(img1.flatten())
 # imgResult = np.reshape(imgResult, (img1.shape[0], img1.shape[2]))
 
@@ -37,6 +37,7 @@ c = 110
 for i in range(len(img1)):
     for j in range(len(img1[0])):
         rest = img1[i,j] - img2[i,j]
+        # scala = (result-0)*(255-0)/(1-0) + 0
         imgResult[i,j] = rest + c
 imgResult = imgResult.astype(np.uint8)
 cv2.imshow("Resultado Sustraccion", imgResult)

@@ -44,6 +44,7 @@ for u in range(width):
     for v in range(height):
         Y = np.array([u,v]) - B
         solve_= cv2.solve(A, Y, X)
+        # print(solve_)
         X = solve_[1]
         X = X.astype(int)
         x = X[0]

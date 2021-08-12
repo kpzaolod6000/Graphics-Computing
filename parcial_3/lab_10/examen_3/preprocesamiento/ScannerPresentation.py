@@ -159,6 +159,7 @@ ax1.set_ylabel('Cantidad de pixeles')
 
 imgThresold = getThresholding(imgGray,210)
 cv2.imshow("image Thresolding", imgThresold )
+
 #===================================================================================================
 # DIVISION DE IMAGENES
 #===================================================================================================

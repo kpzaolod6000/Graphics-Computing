@@ -19,17 +19,17 @@ print(M)
 cos = np.abs(M[0, 0])
 sin = np.abs(M[0, 1])
 
-# compute the new bounding dimensions of the image
+# calcular las nuevas dimensiones delimitadoras de la imagen 
 newWidth = int((height * sin) + (width * cos))
 newHheight = int((height * cos) + (width * sin))
 
-# adjust the rotation matrix to take into account translation
+# ajustar la matriz de rotación para tener en cuenta la traslación 
 M[0, 2] += (newWidth / 2) - px
 M[1, 2] += (newHheight / 2) - py
 print(M)
 
-# rotate the img using cv2.warpAffine
-rotated_img = cv2.warpAffine(src=img, M=M, dsize=(nW, nH))
+# rotacion usando cv2.warpAffine
+rotated_img = cv2.warpAffine(src=img, M=M, dsize=(newWidth, newHheight))
 print(len(rotated_img))
 print(len(rotated_img[0]))
 

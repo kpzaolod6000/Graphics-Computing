@@ -13,7 +13,7 @@ M = np.float32([[1,0,50], [0,1,50]])
 print(M)
  
 # # Apply the affine transformation using cv2.warpAffine()
-imgResult = cv2.warpAffine(img, M, (cols,rows))
+imgResult = cv2.warpAffine(img, M, (cols,rps))
  
 # # Display the image
 # out = cv2.hconcat([img, dst]) // une las imagenes en una sola ventana
